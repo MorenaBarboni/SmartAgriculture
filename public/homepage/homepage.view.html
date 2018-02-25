@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <title>
+        Home
+    </title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <!-- CSS e JS personalizzato -->
+    <link rel="stylesheet" href="../content/css/style.css">
+    <script src="../content/js/script.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <div class="row panel-title title text-center">
+            <h3>
+                <strong> SMART AGRICOLTURE </strong> - by GreenCode</h3>
+        </div>
+        <br>
+        <!-- LOGIN-->
+        <div class="col-md-6" id="login">
+            <div class="col-md-6 col-md-offset-2 background-style">
+                <div class="row text-center text-uppercase">Accedi</div>
+                <form ng-submit="vm.onSubmitLogin()">
+                    <div class="form-group">
+                        <input required type="email" class="form-control" id="email" placeholder="email" ng-model="vm.accessData.email">
+                    </div>
+                    <div class="form-group">
+                        <input required type="password" class="form-control" id="password" placeholder="password" ng-model="vm.accessData.password">
+                    </div>
+                    <button type="submit" class="btn btn-default center-block">Accedi </button>
+                </form>
+            </div>
+        </div>
+        <!-- REGISTRAZIONE-->
+        <div class="col-md-6" id="registrazione">
+            <div class="col-md-6 col-md-offset-1 background-style">
+                <div class="row text-center text-uppercase">Registrati</div>
+                <form ng-submit="vm.onSubmitRegister()">
+                    <div class="form-group">
+                        <input required type="text" class="form-control" id="nome" ng-model="vm.registerData.nome" placeholder="nome">
+                    </div>
+                    <div class="form-group">
+                        <input required type="text" class="form-control" id="cognome" ng-model="vm.registerData.cognome" placeholder="cognome">
+                    </div>
+                    <div class="form-group">
+                        <label class="sr-only">Email</label>
+                        <input required type="email" class="form-control" id="email" ng-model="vm.registerData.email" placeholder="email">
+                    </div>
+                    <div class="form-group">
+                        <input required type="text" class="form-control" id="username" ng-model="vm.registerData.username" placeholder="username">
+                    </div>
+                    <div class="form-group">
+                        <input required type="password" class="form-control" id="password" ng-model="vm.registerData.password" placeholder="password">
+                    </div>
+                    <div class="form-group">
+                        <input required type="password" onkeyup="check()" class="form-control" id="verifica_password" placeholder="conferma password">
+                        <div id="controllo" class="text-danger"></div>
+                    </div>
+                    <button type="submit" class="btn btn-default center-block" id="registrazione">Registrati</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>

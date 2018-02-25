@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html ng-app="greenhouseApp">
+
+<head>
+  <title>Smart Agriculture</title>
+  <base href="/">
+
+  <!-- angular -->
+  <script src="lib/angular/angular.min.js"></script>
+  <script src="lib/angular/angular-route.min.js"></script>
+  <!-- map -->
+  <script src="http://maps.googleapis.com/maps/api/js?sensor=false&language=en"></script>
+  <!-- bootstrap -->
+  <script src="lib/bower_components/jquery/dist/jquery.min.js"></script>
+  <script src="lib/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+  <link rel="stylesheet" href="./content/css/flatly.css">
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css" rel="stylesheet">
+   </head>
+
+<body ng-view>
+  <!-- routeProvider script -->
+  <script src="main.js"></script>
+ 
+  <!-- auth -->
+  <script src="./common/services/authentication.service.js"></script>
+  <script src="./common/services/userService.js"></script> 
+  <script src="./common/services/logoutService.js"></script>
+
+ <!-- homepage -->
+  <script src="./homepage/homepage.controller.js"></script>
+
+  <!-- profile -->
+  <script src="./profile/profile.controller.js"></script> 
+
+ </body>
+
+</html>

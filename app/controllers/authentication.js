@@ -33,6 +33,7 @@ module.exports.registerUser = function (req, res) {
   user.email = req.body.email;
   user.username = req.body.username;
   user.colture = req.body.colture;
+  user.sensori = req.body.sensori;
 
   user.setPassword(req.body.password);
   if (user.username === "" || user.email === "") {

@@ -21,7 +21,8 @@ module.exports.associaColtura = function (req, res) {
     { _id: req.body._id },
     {
       $set: {
-       colture: req.body.colture
+       colture: req.body.colture,
+       sensori: req.body.sensori
       }
     },
     function(err) {

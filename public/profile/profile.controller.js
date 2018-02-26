@@ -10,16 +10,13 @@
 
     vm.user = {}; //Utente corrente
 
-    var provaNumeroSensore = 3;
-    var provaNomeColtura = "Fragola";
-
-    var provaRemoveSensore = 3;
-
-
-
-    vm.nomeColtura //il nome della coltura da associare al sensore
-    vm.colturaDaAssociare = {}; //Oggetto coltura da associare al sensore
-    vm.numSensore // il numero del sensore a cui associare la coltura
+    //Parametri associazione coltura
+    vm.associaColtNome;
+    vm.associaColtSensore;
+    vm.associaColtTerreno;
+    vm.associaColtStato;
+    vm.associaColMin;
+    vm.associaColMax;
 
     vm.coltureDisponibili = [];//Elenco di tutte le colture del db
     vm.terreni = [];
@@ -39,8 +36,6 @@
           getAllColture();
           getTerreno();
           getStatiCrescita();
-        }).then(function () {
-          //
         })
     }
 
@@ -74,9 +69,12 @@
       });
     }
 
+
     //Dato un nome di coltura e un numero di sensore associa la coltura al sensore
-    function associaColtura() {
-      colturaService.getColturaByName(provaNomeColtura).then(function (result) {
+    vm.onSubmitColtura = function () {
+      var colturaDaAssociare = {}
+
+      colturaService.getColturaByName(vm.associaColtNome).then(function (result) {
         if (result === "error") {
           console.log("la coltura non esiste");
         }
@@ -85,24 +83,25 @@
           window.alert("Tutti i sensori sono occupati");
         }
         //Se il sensore scelto è occupato
-        else if (checkSensore(provaNumeroSensore) === true) {
+        else if (checkSensore(vm.associaColtSensore) === true) {
           window.alert("Il sensore selezionato è occupato. Rimuovere la coltura o selezionare un altro sensore");
         }
         else {
-          vm.colturaDaAssociare = result;
-          vm.colturaDaAssociare.sensore = provaNumeroSensore;
+          colturaDaAssociare = result;
+          colturaDaAssociare.sensore = vm.associaColtSensore;
+          colturaDaAssociare.tipoTerreno = vm.associaColtTerreno;
+          colturaDaAssociare.statoCrescita = vm.associaColtStato;
 
           //Se il contadino non ha l'array colture
           if (!vm.user.colture) {
             var colture = []
-            colture.push(vm.colturaDaAssociare);
+            colture.push(colturaDaAssociare);
             vm.user.colture = colture;
-            occupaSensore(provaNumeroSensore);
-
+            occupaSensore(vm.associaColtSensore);
             //Se il contadino ha l'array colture
           } else {
-            vm.user.colture.push(vm.colturaDaAssociare);
-            occupaSensore(provaNumeroSensore);
+            vm.user.colture.push(colturaDaAssociare);
+            occupaSensore(vm.associaColtSensore);
           }
           userService.updateAssociazioneColtura(vm.user).then(function (response) {
             if (response.data === "error") {
@@ -111,7 +110,7 @@
           })
         }
       })
-    }
+    };
 
     //Dato un numero di sensore e controlla se l'array di colture dell'utente contiene già
     //una coltura associata per quel numero di sensore.

@@ -17,7 +17,23 @@
             username: "",
             email: "",
             password: "",
-            colture: []
+            colture: [],
+            sensori: [
+                {
+                    idSensore: 1,
+                    libero: true
+                },
+                {
+                    idSensore: 2,
+                    libero: true
+                }, {
+                    idSensore: 3,
+                    libero: true
+                }, {
+                    idSensore: 4,
+                    libero: true
+                }
+            ]
         };
 
         vm.isLoggedIn = authentication.isLoggedIn();

@@ -3,6 +3,7 @@ var crypto = require("crypto");
 var jwt = require("jsonwebtoken");
 var auth = require("../config/secretExample");
 var Coltura = require('./coltura');
+var Sensore = require('./sensore');
 
 
 var userSchema = new mongoose.Schema({
@@ -25,6 +26,7 @@ var userSchema = new mongoose.Schema({
     required: true
   },
   colture: [Coltura.schema],
+  sensori: [Sensore.schema],
   hash: String,
   salt: String
 },

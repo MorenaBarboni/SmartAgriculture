@@ -1,4 +1,4 @@
-$(document).ready(function () {
+/*$(document).ready(function () {
     $(".colture-show").click(function () {
         $("#colture").show();
         $("#home").hide();
@@ -16,7 +16,7 @@ $(document).ready(function () {
         actions.attr("hidden", checkboxes.is(":checked"));
 
     });
-});
+});*/
 
 function check () {
     var p = document.getElementById('password');

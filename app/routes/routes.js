@@ -5,6 +5,7 @@ var auth = require("../config/authExample");
 
 var ctrlProfile = require("../controllers/profile");
 var ctrlAuth = require("../controllers/authentication");
+var ctrlColtura = require("../controllers/coltura");
 
 
 // Profilo Utente
@@ -14,7 +15,7 @@ router.get("/profile", auth, ctrlProfile.verify);
 router.post("/registration", ctrlAuth.registerUser); //Registrazione utente
 router.post("/login", ctrlAuth.login); //login utente
 
-//Gestione utenti 
-router.delete("/profile/:_id", ctrlProfile.deleteUserById); //Elimina un utente tramite Id
-
+// Colture
+router.get("/coltura/:nome", auth, ctrlColtura.getColturaByName); //Prende una coltura per nome
+router.post("/profile/associaColtura", ctrlProfile.associaColtura); //Associa una coltura a un utente
 module.exports = router;

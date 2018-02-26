@@ -2,29 +2,37 @@ var mongoose = require("mongoose");
 var User = mongoose.model("User");
 
 //Per verificare l'accesso
-module.exports.verify = function(req, res) {
+module.exports.verify = function (req, res) {
   if (!req.payload._id) {
     res.status(401).json({
       message: "You're not authorized to access this page"
     });
   } else {
-    User.findById(req.payload._id).exec(function(err, user) {
+    User.findById(req.payload._id).exec(function (err, user) {
       res.status(200).json(user);
     });
   }
 };
 
-//Cancella un utente selezionandolo tramite id
-module.exports.deleteUserById = function(req, res) {
-  User.remove(
+//Associa una coltura a un utente
+
+module.exports.associaColtura = function (req, res) {
+ User.update(
+    { _id: req.body._id },
     {
-      _id: req.params._id
+      $set: {
+       colture: req.body.colture
+      }
     },
-    function(err, course) {
-      if (err) res.send(err);
-      res.json({ message: "User successfully deleted" });
+    function(err) {
+      if (err) {
+        console.log(err);
+      }
+      res.status(200);
     }
   );
+  
 };
+
 
 

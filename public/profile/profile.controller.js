@@ -16,6 +16,7 @@
     vm.nomeColtura //il nome della coltura da associare al sensore
     vm.colturaDaAssociare = {}; //Oggetto coltura da associare al sensore
     vm.numSensore // il numero del sensore a cui associare la coltura
+    vm.coltureDisponibili = [];
 
     initController();
 
@@ -29,6 +30,13 @@
         }).then(function () {
           associaColtura();
         })
+/*      colturaService
+        .getAllColture()
+        .success(function (result) {
+          vm.coltureDisponibili = result;
+        }).error(function (e) {
+          console.log(e);
+        })*/
     }
 
     //prende una coltura per nome 
@@ -38,28 +46,36 @@
       })
     }
 
-    function associaColtura() {
-      colturaService.getColturaByName(provaNomeColtura).then(function (result) {
-        if (result === "error") {
-          console.log("la coltura non esiste");
-        } else {
-          vm.colturaDaAssociare = result;
-          vm.colturaDaAssociare.sensore = provaNumeroSensore;
 
-          if (!vm.user.colture) {
-            var colture = []
-            colture.push(vm.colturaDaAssociare);
-            vm.user.colture = colture;
-          } else {
-            vm.user.colture.push(vm.colturaDaAssociare);
-          }
-          userService.associaColtura(vm.user).then(function (response) {
-            if (response.data === "error") {
-              console.log("errore");
-            }
-          })
-        }
-      })
+    //stampa tutte le colture disponibili
+    function getAllColture() {
+      colturaService.getAllColture().then(function (result) {
+        vm.coltureDisponibili = result;
+      });
     }
+
+    /*  function associaColtura() {
+        colturaService.getColturaByName(provaNomeColtura).then(function (result) {
+          if (result === "error") {
+            console.log("la coltura non esiste");
+          } else {
+            vm.colturaDaAssociare = result;
+            vm.colturaDaAssociare.sensore = provaNumeroSensore;
+  
+            if (!vm.user.colture) {
+              var colture = []
+              colture.push(vm.colturaDaAssociare);
+              vm.user.colture = colture;
+            } else {
+              vm.user.colture.push(vm.colturaDaAssociare);
+            }
+            userService.associaColtura(vm.user).then(function (response) {
+              if (response.data === "error") {
+                console.log("errore");
+              }
+            })
+          }
+        })
+      }*/
   }
 })();

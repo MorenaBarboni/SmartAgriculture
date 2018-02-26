@@ -156,7 +156,9 @@
                     <tr>
                         <td class="col-md-2">
                             <select>
-
+                                <option ng-repeat="coltura in vm.coltureDisponibili" value="{{coltura.id}}">
+                                   {{coltura.nome}}
+                                </option>
                             </select>
                         </td>
                         <td class="col-md-2">

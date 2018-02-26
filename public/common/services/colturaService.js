@@ -15,6 +15,16 @@
         .then(handleSuccess, handleError);
     };
 
+    getAllColture = function () {
+      return $http
+        .get("/api/coltura/" + nomeColtura, {
+          headers: {
+            Authorization: "Bearer " + authentication.getToken()
+          }
+        })
+        .then(handleSuccess, handleError);
+    };
+
 
     //funzioni private
     function handleSuccess(res) {
@@ -26,8 +36,8 @@
     }
 
     return {
-      getColturaByName: getColturaByName
-
+      getColturaByName: getColturaByName,
+      getAllColture: getAllColture
     };
   }
 })();

@@ -13,4 +13,20 @@ module.exports.getColturaByName = function (req, res) {
   });
 };
 
+module.exports.getAllColture = function (req, res) {
+  Coltura.find({}, function (err, data) {
+    console.log(data);
+    if (data) {
+      var colture = [];
+      data.forEach(d => {
+        colture.push(d);
+      });
+      console.log(colture.nome);
+      res.send(colture);
+    } else {
+      res.send("error");
+    }
+  })
+}
+
 

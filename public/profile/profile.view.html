@@ -163,9 +163,9 @@
                         </td>
                         <td class="col-md-2">
                             <select>
-                                    <option ng-repeat="sensore in vm.freeSensori" value="{{sensore.id}}">
-                                            {{sensore.idSensore}}
-                                        </option>
+                                <option ng-repeat="sensore in vm.user.sensori" ng-if="sensore.libero" value="{{sensore.id}}">
+                                    {{sensore.idSensore}}
+                                </option>
                             </select>
                         </td>
                         <td class="col-md-2">
@@ -183,7 +183,7 @@
                             </select>
                         </td>
                         <td class="col-md-2">
-                            ON-OFF
+                            <input type="checkbox" checked>
                         </td>
                     </tr>
                 </table>

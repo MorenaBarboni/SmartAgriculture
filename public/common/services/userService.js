@@ -23,17 +23,6 @@
       return $http.post("/api/profile/updateColtura", updateData);
     };
 
-    getFreeSensori = function () {
-      return $http
-        .get("/api/colture", {
-          headers: {
-            Authorization: "Bearer " + authentication.getToken()
-          }
-        })
-        .then(handleSuccess, handleError);
-    };
-
-
     //funzioni private
     function handleSuccess(res) {
       return res.data;
@@ -47,7 +36,6 @@
       getProfile: getProfile,
       updateAssociazioneColtura: updateAssociazioneColtura,
       updateColtureUtente:updateColtureUtente,
-      getFreeSensori: getFreeSensori
     };
   }
 })();

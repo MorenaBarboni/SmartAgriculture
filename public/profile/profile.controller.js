@@ -39,7 +39,6 @@
           getAllColture();
           getTerreno();
           getStatiCrescita();
-          getFreeSensori();
         }).then(function () {
           //
         })
@@ -73,12 +72,6 @@
         vm.statiCrescita = result;
         console.log(vm.statiCrescita);
       });
-    }
-
-    function getFreeSensori() {
-      userService.getFreeSensori().then(function (result) {
-        vm.freeSensori = result;
-      })
     }
 
     //Dato un nome di coltura e un numero di sensore associa la coltura al sensore

@@ -50,14 +50,3 @@ module.exports.updateColtura = function (req, res) {
     }
   );
 };
-
-
-
- /*
-    module.exports.getFreeSensori = function (req, res) {
-      User.find({ "email": req.user.email }, function (err, doc) {
-        doc.find({ "sensori.libero": true }, function (err, data) {
-          res.send(data);
-        })
-      })
-    }*/

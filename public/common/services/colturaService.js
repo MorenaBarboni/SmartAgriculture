@@ -25,6 +25,25 @@
         .then(handleSuccess, handleError);
     };
 
+    getTerreno = function () {
+      return $http
+        .get("/api/colture", {
+          headers: {
+            Authorization: "Bearer " + authentication.getToken()
+          }
+        })
+        .then(handleSuccess, handleError);
+    };
+
+    getStatiCrescita = function () {
+      return $http
+        .get("/api/colture", {
+          headers: {
+            Authorization: "Bearer " + authentication.getToken()
+          }
+        })
+        .then(handleSuccess, handleError);
+    };
 
     //funzioni private
     function handleSuccess(res) {
@@ -37,7 +56,9 @@
 
     return {
       getColturaByName: getColturaByName,
-      getAllColture: getAllColture
+      getAllColture: getAllColture,
+      getTerreno : getTerreno,
+      getStatiCrescita : getStatiCrescita
     };
   }
 })();

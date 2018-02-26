@@ -17,22 +17,29 @@ module.exports.verify = function (req, res) {
 //Associa una coltura a un utente
 
 module.exports.associaColtura = function (req, res) {
- User.update(
+  User.update(
     { _id: req.body._id },
     {
       $set: {
-       colture: req.body.colture,
-       sensori: req.body.sensori
+        colture: req.body.colture,
+        sensori: req.body.sensori
       }
     },
-    function(err) {
+    function (err) {
       if (err) {
         console.log(err);
       }
       res.status(200);
     }
   );
-  
+  /*
+    module.exports.getFreeSensori = function (req, res) {
+      User.find({ "email": req.user.email }, function (err, doc) {
+        doc.find({ "sensori.libero": true }, function (err, data) {
+          res.send(data);
+        })
+      })
+    }*/
 };
 
 

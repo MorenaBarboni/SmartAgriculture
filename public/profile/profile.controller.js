@@ -18,6 +18,9 @@
     vm.numSensore // il numero del sensore a cui associare la coltura
 
     vm.coltureDisponibili = [];
+    vm.terreni = [];
+    vm.statiCrescita = [];
+    vm.freeSensori = [];
 
     initController();
 
@@ -30,14 +33,10 @@
           console.log(e);
         }).then(function () {
           getAllColture();
+          getTerreno();
+          getStatiCrescita();
+          getFreeSensori();
         })
-      /*      colturaService
-              .getAllColture()
-              .success(function (result) {
-                vm.coltureDisponibili = result;
-              }).error(function (e) {
-                console.log(e);
-              })*/
     }
 
     //prende una coltura per nome 
@@ -47,12 +46,29 @@
       })
     }
 
-
     //stampa tutte le colture disponibili
     function getAllColture() {
       colturaService.getAllColture().then(function (result) {
         vm.coltureDisponibili = result;
       });
+    }
+
+    function getTerreno(){
+      colturaService.getTerreno().then(function (result) {
+        vm.terreni = result;
+      });
+    }
+
+    function getStatiCrescita(){
+      colturaService.getStatiCrescita.then(function (result) {
+        vm.statiCrescita = result;
+      });
+    }
+
+    function getFreeSensori(){
+      userService.getFreeSensori.then(function(result){
+        vm.freeSensori = result;
+      })
     }
 
     function associaColtura() {

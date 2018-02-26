@@ -18,6 +18,6 @@ router.post("/login", ctrlAuth.login); //login utente
 // Colture
 router.get("/coltura/:nome", auth, ctrlColtura.getColturaByName); //Prende una coltura per nome
 router.post("/profile/associaColtura", ctrlProfile.associaColtura); //Associa una coltura a un utente
-router.get("/colture", ctrlColtura.getAllColture); //Prende tutte le colture disponibili
+router.get("/colture", ctrlColtura.getAllColture, ctrlColtura.getTerreno, ctrlColtura.getStatiCrescita/*, ctrlProfile.getFreeSensori*/); //Prende tutte le colture disponibili
 
 module.exports = router;

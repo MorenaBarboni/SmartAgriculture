@@ -157,23 +157,29 @@
                         <td class="col-md-2">
                             <select>
                                 <option ng-repeat="coltura in vm.coltureDisponibili" value="{{coltura.id}}">
-                                   {{coltura.nome}}
+                                    {{coltura.nome}}
                                 </option>
                             </select>
                         </td>
                         <td class="col-md-2">
                             <select>
-
+                                    <option ng-repeat="sensore in vm.freeSensori" value="{{sensore.id}}">
+                                            {{sensore.idSensore}}
+                                        </option>
                             </select>
                         </td>
                         <td class="col-md-2">
                             <select>
-
+                                <option ng-repeat="t in vm.terreni">
+                                    {{t}}
+                                </option>
                             </select>
                         </td>
                         <td class="col-md-2">
                             <select>
-
+                                <option ng-repeat="sc in vm.statiCrescita">
+                                    {{sc}}
+                                </option>
                             </select>
                         </td>
                         <td class="col-md-2">

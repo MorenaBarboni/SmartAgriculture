@@ -13,9 +13,19 @@
       });
     };
 
-     //Associa una coltura a un contadino
-     associaColtura = function (user) {
+    //Associa una coltura a un contadino
+    associaColtura = function (user) {
       return $http.post("/api/profile/associaColtura", user);
+    };
+
+    getFreeSensori = function () {
+      return $http
+        .get("/api/colture", {
+          headers: {
+            Authorization: "Bearer " + authentication.getToken()
+          }
+        })
+        .then(handleSuccess, handleError);
     };
 
 
@@ -30,7 +40,8 @@
 
     return {
       getProfile: getProfile,
-      associaColtura: associaColtura
+      associaColtura: associaColtura,
+      getFreeSensori: getFreeSensori
     };
   }
 })();

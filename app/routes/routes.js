@@ -17,9 +17,14 @@ router.post("/login", ctrlAuth.login); //login utente
 
 // Colture
 router.get("/coltura/:nome", auth, ctrlColtura.getColturaByName); //Prende una coltura per nome
-//L'HO COMMENTATA PERCHE MI DAVA ERRORE :(
-//router.post("/profile/associaColtura", ctrlProfile.associaColtura); //Associa una coltura a un utente
-router.get("/colture", ctrlColtura.getAllColture, ctrlColtura.getTerreno, ctrlColtura.getStatiCrescita/*, ctrlProfile.getFreeSensori*/); //Prende tutte le colture disponibili
-router.post("/profile/updateColtura", ctrlProfile.updateAssociazioneColtura); //Associa o Rimuove una coltura a un sensore per un certo utente
+router.get("/colture", ctrlColtura.getAllColture); //Prende tutte le colture disponibili
+router.get("/terreni", ctrlColtura.getTerreno);  //Ottiene tutti i tipi di terreno
+router.get("/statiCrescita", ctrlColtura.getStatiCrescita);//Ottiene tutti i possibili stati di crescita
+
+//Associazione Sensori
+router.post("/profile/updateAssociazioneColtura", ctrlProfile.updateAssociazioneColtura); //Associa o Rimuove una coltura a un sensore per un certo utente
+
+//Modifica Colture
+router.post("/profile/updateColtura", ctrlProfile.updateColtura); //Aggiorna le colture del contadino in caso di modifiche
 
 module.exports = router;

@@ -20,12 +20,12 @@ module.exports.getAllColture = function (req, res) {
   }).sort({ nome: 1 });
 };
 
-console.log(Coltura.schema.path('tipoTerreno').enumValues);
+//Ottiene tutti i terreni
 module.exports.getTerreno = function (req, res) {
   res.send(Coltura.schema.path('tipoTerreno').enumValues);
 };
 
-console.log(Coltura.schema.path('statoCrescita').enumValues);
+//Ottiene tutti gli stati di crescita
 module.exports.getStatiCrescita = function (req, res) {
   res.send(Coltura.schema.path('statoCrescita').enumValues);
 };

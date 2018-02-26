@@ -14,10 +14,9 @@ module.exports.verify = function (req, res) {
   }
 };
 
-//Associa una coltura a un utente
-
+//Associa o rimuove una coltura a un sensore per un utente
 module.exports.updateAssociazioneColtura = function (req, res) {
- User.update(
+  User.update(
     { _id: req.body._id },
     {
       $set: {
@@ -32,7 +31,29 @@ module.exports.updateAssociazioneColtura = function (req, res) {
       res.status(200);
     }
   );
-  /*
+};
+
+//Modifica colture utente
+module.exports.updateColtura = function (req, res) {
+   User.update(
+    { _id: req.body._id },
+    {
+      $set: {
+        colture: req.body.colture
+      }
+    },
+    function (err) {
+      if (err) {
+        console.log(err);
+      }
+      res.status(200);
+    }
+  );
+};
+
+
+
+ /*
     module.exports.getFreeSensori = function (req, res) {
       User.find({ "email": req.user.email }, function (err, doc) {
         doc.find({ "sensori.libero": true }, function (err, data) {
@@ -40,7 +61,3 @@ module.exports.updateAssociazioneColtura = function (req, res) {
         })
       })
     }*/
-};
-
-
-

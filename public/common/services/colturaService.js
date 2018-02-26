@@ -15,6 +15,7 @@
         .then(handleSuccess, handleError);
     };
 
+     //Ottiene tutte le colture
     getAllColture = function () {
       return $http
         .get("/api/colture", {
@@ -25,19 +26,21 @@
         .then(handleSuccess, handleError);
     };
 
+     //Ottiene tutti i tipi di terreno
     getTerreno = function () {
       return $http
-        .get("/api/colture", {
+        .get("/api/terreni", {
           headers: {
             Authorization: "Bearer " + authentication.getToken()
           }
         })
         .then(handleSuccess, handleError);
     };
-
+    
+     //Ottiene tutti i possibili stati di crescita
     getStatiCrescita = function () {
       return $http
-        .get("/api/colture", {
+        .get("/api/statiCrescita", {
           headers: {
             Authorization: "Bearer " + authentication.getToken()
           }

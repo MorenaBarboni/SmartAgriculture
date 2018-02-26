@@ -144,51 +144,53 @@
             <div class="row panel-title text-center text-uppercase">
                 <strong> Aggiungi Coltura </strong>
             </div>
-            <div>
-                <table class="table">
-                    <tr>
-                        <th class="col-md-2 text-capitalize">Nome Coltura: </th>
-                        <th class="col-md-2 text-capitalize">Scegli Sensore: </th>
-                        <th class="col-md-2 text-capitalize">Tipo Terreno: </th>
-                        <th class="col-md-2 text-capitalize"> Stato Crescita: </th>
-                        <th class="col-md-2 text-capitalize">Irrigazione Automatica: </th>
-                    </tr>
-                    <tr>
-                        <td class="col-md-2">
-                            <select>
-                                <option ng-repeat="coltura in vm.coltureDisponibili" value="{{coltura.id}}">
-                                    {{coltura.nome}}
-                                </option>
-                            </select>
-                        </td>
-                        <td class="col-md-2">
-                            <select>
-                                <option ng-repeat="sensore in vm.user.sensori" ng-if="sensore.libero" value="{{sensore.id}}">
-                                    {{sensore.idSensore}}
-                                </option>
-                            </select>
-                        </td>
-                        <td class="col-md-2">
-                            <select>
-                                <option ng-repeat="t in vm.terreni">
-                                    {{t}}
-                                </option>
-                            </select>
-                        </td>
-                        <td class="col-md-2">
-                            <select>
-                                <option ng-repeat="sc in vm.statiCrescita">
-                                    {{sc}}
-                                </option>
-                            </select>
-                        </td>
-                        <td class="col-md-2">
-                            <input type="checkbox" checked>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <button type="submit" class="btn btn-success">Aggiungi</button>
+            <form ng-submit="vm.onSubmitColtura()">
+                <div>
+                    <table class="table">
+                        <tr>
+                            <th class="col-md-2 text-capitalize">Nome Coltura: </th>
+                            <th class="col-md-2 text-capitalize">Scegli Sensore: </th>
+                            <th class="col-md-2 text-capitalize">Tipo Terreno: </th>
+                            <th class="col-md-2 text-capitalize"> Stato Crescita: </th>
+                            <th class="col-md-2 text-capitalize">Irrigazione Automatica: </th>
+                        </tr>
+                        <tr>
+                            <td class="col-md-2">
+                                <select ng-model="vm.associaColtNome">
+                                    <option ng-repeat="coltura in vm.coltureDisponibili" value="{{coltura.nome}}">
+                                        {{coltura.nome}}
+                                    </option>
+                                </select>
+                            </td>
+                            <td class="col-md-2">
+                                <select ng-model="vm.associaColtSensore">
+                                    <option ng-repeat="sensore in vm.user.sensori" ng-if="sensore.libero" value="{{sensore.idSensore}}">
+                                        {{sensore.idSensore}}
+                                    </option>
+                                </select>
+                            </td>
+                            <td class="col-md-2">
+                                <select ng-model="vm.associaColtTerreno">
+                                    <option ng-repeat="t in vm.terreni" value="{{t}}">
+                                        {{t}}
+                                    </option>
+                                </select>
+                            </td>
+                            <td class="col-md-2">
+                                <select ng-model="vm.associaColtStato">
+                                    <option ng-repeat="sc in vm.statiCrescita" value="{{sc}}">
+                                        {{sc}}
+                                    </option>
+                                </select>
+                            </td>
+                            <td class="col-md-2">
+                                <input type="checkbox" checked>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <button type="submit" class="btn btn-success">Aggiungi</button>
+            </form>
         </section>
         <section id="modifica">
             <div class="row panel-title text-center text-uppercase">

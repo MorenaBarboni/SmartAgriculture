@@ -16,8 +16,8 @@ module.exports.verify = function (req, res) {
 
 //Associa una coltura a un utente
 
-module.exports.associaColtura = function (req, res) {
-  User.update(
+module.exports.updateAssociazioneColtura = function (req, res) {
+ User.update(
     { _id: req.body._id },
     {
       $set: {

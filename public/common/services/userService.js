@@ -13,9 +13,9 @@
       });
     };
 
-    //Associa una coltura a un contadino
-    associaColtura = function (user) {
-      return $http.post("/api/profile/associaColtura", user);
+     //Associa una coltura a un contadino
+     updateAssociazioneColtura = function (user) {
+      return $http.post("/api/profile/updateColtura", user);
     };
 
     getFreeSensori = function () {
@@ -40,7 +40,7 @@
 
     return {
       getProfile: getProfile,
-      associaColtura: associaColtura,
+      updateAssociazioneColtura: updateAssociazioneColtura,
       getFreeSensori: getFreeSensori
     };
   }

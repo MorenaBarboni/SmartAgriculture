@@ -14,8 +14,8 @@
     };
 
      //Associa una coltura a un contadino
-     associaColtura = function (user) {
-      return $http.post("/api/profile/associaColtura", user);
+     updateAssociazioneColtura = function (user) {
+      return $http.post("/api/profile/updateColtura", user);
     };
 
 
@@ -30,7 +30,7 @@
 
     return {
       getProfile: getProfile,
-      associaColtura: associaColtura
+      updateAssociazioneColtura: updateAssociazioneColtura
     };
   }
 })();

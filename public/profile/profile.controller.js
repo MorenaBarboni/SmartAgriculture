@@ -101,13 +101,15 @@
             //Se il contadino ha l'array colture
           } else {
             vm.user.colture.push(colturaDaAssociare);
-            occupaSensore(vm.associaColtSensore);
+            occupaSensore(vm.associaColtSensore)
           }
           userService.updateAssociazioneColtura(vm.user).then(function (response) {
             if (response.data === "error") {
               console.log("errore");
             }
+
           })
+          window.location.reload();
         }
       })
     };
@@ -130,7 +132,7 @@
       var sensoriUtente = vm.user.sensori;
       for (var i = 0; i < sensoriUtente.length; i++) {
         idSensore = sensoriUtente[i].idSensore;
-        if (idSensore === numeroSensore) {
+        if (idSensore == numeroSensore) {
           sensoriUtente[i].libero = false;
         }
       }

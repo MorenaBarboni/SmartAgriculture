@@ -17,7 +17,7 @@
 
     getAllColture = function () {
       return $http
-        .get("/api/coltura/" + nomeColtura, {
+        .get("/api/colture", {
           headers: {
             Authorization: "Bearer " + authentication.getToken()
           }

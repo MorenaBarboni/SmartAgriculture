@@ -13,20 +13,9 @@ module.exports.getColturaByName = function (req, res) {
   });
 };
 
+//Ottiene tutte le colture
 module.exports.getAllColture = function (req, res) {
-  Coltura.find({}, function (err, data) {
-    console.log(data);
-    if (data) {
-      var colture = [];
-      data.forEach(d => {
-        colture.push(d);
-      });
-      console.log(colture.nome);
-      res.send(colture);
-    } else {
-      res.send("error");
-    }
-  })
-}
-
-
+ Coltura.find({}, function (err, data) {
+    res.send(data);
+  }).sort({ nome: 1 });
+};

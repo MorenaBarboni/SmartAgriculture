@@ -16,6 +16,7 @@
     vm.nomeColtura //il nome della coltura da associare al sensore
     vm.colturaDaAssociare = {}; //Oggetto coltura da associare al sensore
     vm.numSensore // il numero del sensore a cui associare la coltura
+
     vm.coltureDisponibili = [];
 
     initController();
@@ -28,7 +29,7 @@
         }).error(function (e) {
           console.log(e);
         }).then(function () {
-          //associaColtura();
+          getAllColture();
         })
       /*      colturaService
               .getAllColture()

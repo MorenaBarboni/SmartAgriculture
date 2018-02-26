@@ -113,29 +113,34 @@
                     <th class="col-md-2 text-capitalize"> Stato Crescita: </th>
                     <th class="col-md-2 text-capitalize">Irrigazione Automatica: </th>
                 </tr>
-                <tr>
+                <tr ng-repeat="data in vm.user.colture">
                     <td class="col-md-1 text-center">
-                        <button type="submit" class="btn btn-link" title="Rimuovi Coltura">
-                            <i class="fa fa-minus-circle fa-lg" aria-hidden="true" style="color: red"></i>
-                        </button>
+                        <form ng-submit="vm.onDelete()">
+                            <button type="submit" class="btn btn-link" title="Rimuovi Coltura">
+                                <i class="fa fa-minus-circle fa-lg" aria-hidden="true" style="color: red"></i>
+                            </button>
+                        </form>
                     </td>
                     <td class="col-md-2">
-                        NOME
+                        {{data.nome}}
                     </td>
                     <td class="col-md-2">
                         MIN - MAX UMIDITA
                     </td>
                     <td class="col-md-2">
-                        SENSORE
+                        {{data.sensore}}
                     </td>
                     <td class="col-md-2">
-                        TERRENO
+                        {{data.tipoTerreno}}
                     </td>
                     <td class="col-md-2">
-                        STATO
+                        {{data.statoCrescita}}
                     </td>
-                    <td class="col-md-1">
-                        ON-OFF
+                    <td class="col-md-1" ng-show="{{data.irrigazioneAutomatica}}">
+                        Attiva
+                    </td>
+                    <td class="col-md-1" ng-show="!{{data.irrigazioneAutomatica}}">
+                        Disattiva
                     </td>
                 </tr>
             </table>

@@ -13,6 +13,7 @@
     <!-- Latest compiled JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- CSS e JS personalizzato -->
     <link rel="stylesheet" href="../content/css/style.css">
     <script src="../content/js/script.js"></script>
@@ -41,7 +42,7 @@
                             <a href="#colture" class="colture-show">Le tue colture</a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
                                 <span class="caret"></span>
                             </a>
                             <ul class="dropdown-menu" role="menu">
@@ -59,7 +60,7 @@
             </div>
         </nav>
     </div>
-    <div class="container" id="home">
+    <section class="container" id="home">
         <div class="col-md-6 col-md-offset-3">
             <ul class="list-group text-center">
                 <li class="list-group-item">
@@ -80,8 +81,8 @@
                 </li>
             </ul>
         </div>
-    </div>
-    <div class="container colture" id="colture">
+    </section>
+    <section class="container colture" id="colture">
         <nav class="navbar navbar-inverse navbar-right my-nav">
             <div>
                 <ul class="nav navbar-nav">
@@ -212,12 +213,12 @@
                             </select>
                         </td>
                         <td class="col-md-2">
-                            <input type="checkbox" checked>
+                            <input type="checkbox" ng-model="orari">
                         </td>
                     </tr>
                 </table>
             </div>
-            <div class="container" id="orari_irrigazione" hidden>
+            <div class="container" id="orari_irrigazione" ng-if="!orari">
                 <div class="row panel-title text-center text-uppercase">
                     Imposta gli Orari di Irrigazione </div>
                 <div class="row">
@@ -234,5 +235,5 @@
             <button type="submit" class="btn btn-success">Salva</button>
         </section>
 
-    </div>
+    </section>
 </body>

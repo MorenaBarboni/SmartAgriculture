@@ -43,9 +43,9 @@ body {
   position: fixed;
   bottom: 0;
 }
-.colture{
+/*.colture{
   display: none;
-}
+}*/
 section {
   height: 100vh ;
 }

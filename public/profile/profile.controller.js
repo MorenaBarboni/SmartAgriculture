@@ -211,25 +211,8 @@
       for (var i = 0; i < vm.user.colture.length; i++) {
         if (vm.user.colture[i].sensore == vm.modificaColtSensore) {
           vm.user.colture[i].statoCrescita = vm.modificaColtStato;
-          switch (vm.user.colture[i].statoCrescita) {
-            case "Seme":
-              vm.user.colture[i].minUmidita[0] = vm.modificaColtMin;
-              vm.user.colture[i].maxUmidita[0] = vm.modificaColtMax;
-              break;
-            case "Germoglio":
-              vm.user.colture[i].minUmidita[1] = vm.modificaColtMin;
-              vm.user.colture[i].maxUmidita[1] = vm.modificaColtMax;
-              break;
-
-            case "PiantaAdulta":
-              vm.user.colture[i].minUmidita[2] = vm.modificaColtMin;
-              vm.user.colture[i].maxUmidita[2] = vm.modificaColtMax;
-              break;
-            case "Raccolta":
-              vm.user.colture[i].minUmidita[3] = vm.modificaColtMin;
-              vm.user.colture[i].maxUmidita[3] = vm.modificaColtMax;
-              break;
-          }
+          vm.user.colture[i].minUmidita[0] = vm.modificaColtMin;
+          vm.user.colture[i].maxUmidita[0] = vm.modificaColtMax;
           break;
         }
         userService.updateColtureUtente(vm.user).then(function (response) {

@@ -1,8 +1,8 @@
 (function () {
   angular.module("greenhouseApp").controller("profileCtrl", profileCtrl);
 
-  profileCtrl.$inject = ["$window", "$location", "userService", "authentication", "colturaService"];
-  function profileCtrl($window, $location, userService, authentication, colturaService) {
+  profileCtrl.$inject = ["$window", "$location", "userService", "authentication", "colturaService", "$scope"];
+  function profileCtrl($window, $location, userService, authentication, colturaService, $scope) {
 
     var vm = this;
 
@@ -21,8 +21,8 @@
     vm.associaColtSensore;
     vm.associaColtTerreno;
     vm.associaColtStato;
-    vm.associaColtMin;
-    vm.associaColtMax;
+    //  vm.associaColtMin; PER ORA NON SERVONO
+    //  vm.associaColtMax; IN CASO RICORDIAMOCI A CANCELLARLI!!
     vm.associaColtIrrigazione;
 
     //Parametri rimozione coltura
@@ -111,21 +111,20 @@
           //Associa umidità iniziale
           switch (vm.associaColtStato) {
             case "Seme":
-              colturaDaAssociare.minUmidita[0] = vm.associaColtMin;
-              colturaDaAssociare.maxUmidita[0] = vm.associaColtMax;
+              colturaDaAssociare.minUmidita = colturaDaAssociare.minUmidita.slice(0, 1);
+              colturaDaAssociare.maxUmidita = colturaDaAssociare.maxUmidita.slice(0, 1);
               break;
             case "Germoglio":
-              colturaDaAssociare.minUmidita[1] = vm.associaColtMin;
-              colturaDaAssociare.maxUmidita[1] = vm.associaColtMax;
+              colturaDaAssociare.minUmidita = colturaDaAssociare.minUmidita.slice(1, 2);
+              colturaDaAssociare.maxUmidita = colturaDaAssociare.maxUmidita.slice(1, 2);
               break;
-
             case "PiantaAdulta":
-              colturaDaAssociare.minUmidita[2] = vm.associaColtMin;
-              colturaDaAssociare.maxUmidita[2] = vm.associaColtMax;
+              colturaDaAssociare.minUmidita = colturaDaAssociare.minUmidita.slice(2, 3);
+              colturaDaAssociare.maxUmidita = colturaDaAssociare.maxUmidita.slice(2, 3);
               break;
             case "Raccolta":
-              colturaDaAssociare.minUmidita[3] = vm.associaColtMin;
-              colturaDaAssociare.maxUmidita[3] = vm.associaColtMax;
+              colturaDaAssociare.minUmidita = colturaDaAssociare.minUmidita.slice(3, 4);
+              colturaDaAssociare.maxUmidita = colturaDaAssociare.maxUmidita.slice(3, 4);
               break;
           }
 
@@ -175,17 +174,18 @@
       }
     }
 
-
     //Dato un numero di sensore rimuove la coltura associata a quel sensore
-    vm.onRimuoviColtura = function () {
-      removeColturaFromUser(vm.rimuoviColtSensore);
-      liberaSensore(vm.rimuoviColtSensore);
+    $scope.onRimuoviColtura = function (rimuoviColtSensore) {
+      console.log(rimuoviColtSensore);
+      removeColturaFromUser(rimuoviColtSensore);
+      liberaSensore(rimuoviColtSensore);
       userService.updateAssociazioneColtura(vm.user).then(function (response) {
         if (response.data === "error") {
           console.log("errore");
         }
       })
     }
+
     //Prende in input un numero di sensore e rimuove la coltura che si riferisce a quel sensore
     //dall'array delle colture dell'utente
     function removeColturaFromUser(numeroSensore) {

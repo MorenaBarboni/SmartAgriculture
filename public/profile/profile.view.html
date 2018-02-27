@@ -115,140 +115,139 @@
                 </tr>
                 <tr ng-repeat="data in vm.user.colture">
                     <td class="col-md-1 text-center">
-                        <form ng-submit="vm.onRimuoviColtura()">
-                            <button type="submit" class="btn btn-link" title="Rimuovi Coltura" ng-model="vm.rimuoviColtSensore">
-                                <i class="fa fa-minus-circle fa-lg" aria-hidden="true" style="color: red" value="{{data.sensore}}"></i>
+                        <form>
+                            <button type="submit" class="btn btn-link" title="Rimuovi Coltura">
+                                <i class="fa fa-minus-circle fa-lg" aria-hidden="true" style="color: red" ng-click="onRimuoviColtura(data.sensore)"></i>
                             </button>
                         </form>
                     </td>
-                    <td class=" col-md-2 ">
+                    <td class="col-md-2">
                         {{data.nome}}
                     </td>
-                    <td class="col-md-2 ">
-                        {{data.minUmidita}} - {{data.maxUmidita}}
+                    <td class="col-md-2">
+                        {{data.minUmidita.toString()}} - {{data.maxUmidita.toString()}}
                     </td>
-                    <td class="col-md-2 ">
+                    <td class="col-md-2">
                         {{data.sensore}}
                     </td>
-                    <td class="col-md-2 ">
+                    <td class="col-md-2">
                         {{data.tipoTerreno}}
                     </td>
-                    <td class="col-md-2 ">
+                    <td class="col-md-2">
                         {{data.statoCrescita}}
                     </td>
-                    <td class="col-md-1 " ng-show="{{data.irrigazioneAutomatica}} ">
+                    <td class="col-md-1" ng-show="{{data.irrigazioneAutomatica}}">
                         Attiva
                     </td>
-                    <td class="col-md-1 " ng-show="!{{data.irrigazioneAutomatica}} ">
+                    <td class="col-md-1" ng-show="!{{data.irrigazioneAutomatica}}">
                         Disattiva
                     </td>
                 </tr>
             </table>
         </section>
-        <section id="aggiungi ">
-            <div class="row panel-title text-center text-uppercase ">
+        <section id="aggiungi">
+            <div class="row panel-title text-center text-uppercase">
                 <strong> Aggiungi Coltura </strong>
             </div>
-            <form ng-submit="vm.onSubmitColtura() ">
+            <form ng-submit="vm.onSubmitColtura()">
                 <div>
-                    <table class="table ">
+                    <table class="table">
                         <tr>
-                            <th class="col-md-2 text-capitalize ">Nome Coltura: </th>
-                            <th class="col-md-2 text-capitalize ">Scegli Sensore: </th>
-                            <th class="col-md-2 text-capitalize ">Tipo Terreno: </th>
-                            <th class="col-md-2 text-capitalize "> Stato Crescita: </th>
-                            <th class="col-md-2 text-capitalize ">Irrigazione Automatica: </th>
+                            <th class="col-md-2 text-capitalize">Nome Coltura: </th>
+                            <th class="col-md-2 text-capitalize">Scegli Sensore: </th>
+                            <th class="col-md-2 text-capitalize">Tipo Terreno: </th>
+                            <th class="col-md-2 text-capitalize"> Stato Crescita: </th>
+                            <th class="col-md-2 text-capitalize">Irrigazione Automatica: </th>
                         </tr>
                         <tr>
-                            <td class="col-md-2 ">
-                                <select ng-model="vm.associaColtNome ">
-                                    <option ng-repeat="coltura in vm.coltureDisponibili " value="{{coltura.nome}} ">
+                            <td class="col-md-2">
+                                <select ng-model="vm.associaColtNome">
+                                    <option ng-repeat="coltura in vm.coltureDisponibili" value="{{coltura.nome}}">
                                         {{coltura.nome}}
                                     </option>
                                 </select>
                             </td>
-                            <td class="col-md-2 ">
-                                <select ng-model="vm.associaColtSensore ">
-                                    <option ng-repeat="sensore in vm.user.sensori " ng-if="sensore.libero " value="{{sensore.idSensore}} ">
+                            <td class="col-md-2">
+                                <select ng-model="vm.associaColtSensore">
+                                    <option ng-repeat="sensore in vm.user.sensori" ng-if="sensore.libero" value="{{sensore.idSensore}}">
                                         {{sensore.idSensore}}
                                     </option>
                                 </select>
                             </td>
-                            <td class="col-md-2 ">
-                                <select ng-model="vm.associaColtTerreno ">
-                                    <option ng-repeat="t in vm.terreni " value="{{t}} ">
+                            <td class="col-md-2">
+                                <select ng-model="vm.associaColtTerreno">
+                                    <option ng-repeat="t in vm.terreni" value="{{t}}">
                                         {{t}}
                                     </option>
                                 </select>
                             </td>
-                            <td class="col-md-2 ">
-                                <select ng-model="vm.associaColtStato ">
-                                    <option ng-repeat="sc in vm.statiCrescita " value="{{sc}} ">
+                            <td class="col-md-2">
+                                <select ng-model="vm.associaColtStato">
+                                    <option ng-repeat="sc in vm.statiCrescita" value="{{sc}}">
                                         {{sc}}
                                     </option>
                                 </select>
                             </td>
-                            <td class="col-md-2 ">
-                                <input type="checkbox " ng-model="vm.associaColtIrrigazione " ng-true-value="1
-                                    " ng-false-value="0 ">
+                            <td class="col-md-2">
+                                <input type="checkbox" ng-model="vm.associaColtIrrigazione" ng-true-value="1" ng-false-value="0">
                             </td>
                         </tr>
                     </table>
                 </div>
-                <button type="submit " class="btn btn-success ">Aggiungi</button>
+                <button type="submit" class="btn btn-success">Aggiungi</button>
             </form>
         </section>
-        <section id="modifica ">
-            <div class="row panel-title text-center text-uppercase ">
+        <section id="modifica">
+            <div class="row panel-title text-center text-uppercase">
                 <strong> Modifica Coltura </strong>
             </div>
             <div>
-                <table class="table ">
+                <table class="table">
                     <tr>
-                        <th class="col-md-2 text-capitalize ">Nome Coltura: </th>
-                        <th class="col-md-2 text-capitalize ">Umidità Minima Ideale: </th>
-                        <th class="col-md-2 text-capitalize ">Umidità Minima Ideale: </th>
-                        <th class="col-md-2 text-capitalize "> Stato Crescita: </th>
-                        <th class="col-md-2 text-capitalize ">Irrigazione Automatica: </th>
+                        <th class="col-md-2 text-capitalize">Nome Coltura: </th>
+                        <th class="col-md-2 text-capitalize">Umidità Minima Ideale: </th>
+                        <th class="col-md-2 text-capitalize">Umidità Minima Ideale: </th>
+                        <th class="col-md-2 text-capitalize"> Stato Crescita: </th>
+                        <th class="col-md-2 text-capitalize">Irrigazione Automatica: </th>
                     </tr>
                     <tr>
-                        <td class="col-md-2 ">
+                        <td class="col-md-2">
                             <select>
 
                             </select>
                         </td>
-                        <td class="col-md-2 ">
-                            <input type="number " value="30 ">
+                        <td class="col-md-2">
+                            <input type="number" value="30">
                         </td>
-                        <td class="col-md-2 ">
-                            <input type="number " value="50 ">
+                        <td class="col-md-2">
+                            <input type="number" value="50">
                         </td>
-                        <td class="col-md-2 ">
+                        <td class="col-md-2">
                             <select>
 
                             </select>
                         </td>
-                        <td class="col-md-2 ">
-                            <input type="checkbox " ng-model="orari ">
+                        <td class="col-md-2">
+                            <input type="checkbox" ng-model="orari">
                         </td>
                     </tr>
                 </table>
             </div>
-            <div class="container " id="orari_irrigazione " ng-if="!orari ">
-                <div class="row panel-title text-center text-uppercase ">
+            <div class="container" id="orari_irrigazione" ng-if="!orari">
+                <div class="row panel-title text-center text-uppercase">
                     Imposta gli Orari di Irrigazione </div>
-                <div class="row ">
-                    <div class="col-md-4 col-md-offset-3 ">
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-3">
                         <label>Orario Inizio</label>
-                        <input type="time ">
+                        <input type="time">
                     </div>
-                    <div class="col-md-4 ">
+                    <div class="col-md-4">
                         <label>Orario Fine</label>
-                        <input type="time ">
+                        <input type="time">
                     </div>
                 </div>
             </div>
-            <button type="submit " class="btn btn-success ">Salva</button>
+            <button type="submit" class="btn btn-success">Salva</button>
         </section>
 
     </section>

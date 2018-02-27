@@ -23,12 +23,10 @@
     vm.associaColtStato;
     vm.associaColtMin;
     vm.associaColtMax;
-
+    vm.associaColtIrrigazione;
 
     //Parametri rimozione coltura
     vm.rimuoviColtSensore;
-
-    vm.freeSensori = [];
 
     initController();
 
@@ -99,24 +97,29 @@
           colturaDaAssociare.tipoTerreno = vm.associaColtTerreno;
           colturaDaAssociare.statoCrescita = vm.associaColtStato;
 
+          if (vm.associaColtIrrigazione == 1)
+            colturaDaAssociare.irrigazioneAutomatica = true;
+          else
+            colturaDaAssociare.irrigazioneAutomatica = false;
+
           //Associa umidità iniziale
           switch (vm.associaColtStato) {
             case "Seme":
-              vm.user.colture[index].minUmidita[0] = vm.associaColtMin;
-              vm.user.colture[index].maxUmidita[0] = vm.associaColtMax;
+              colturaDaAssociare.minUmidita[0] = vm.associaColtMin;
+              colturaDaAssociare.maxUmidita[0] = vm.associaColtMax;
               break;
             case "Germoglio":
-              vm.user.colture[index].minUmidita[1] = vm.associaColtMin;
-              vm.user.colture[index].maxUmidita[1] = vm.associaColtMax;
+              colturaDaAssociare.minUmidita[1] = vm.associaColtMin;
+              colturaDaAssociare.maxUmidita[1] = vm.associaColtMax;
               break;
 
             case "PiantaAdulta":
-              vm.user.colture[index].minUmidita[2] = vm.associaColtMin;
-              vm.user.colture[index].maxUmidita[2] = vm.associaColtMax;
+              colturaDaAssociare.minUmidita[2] = vm.associaColtMin;
+              colturaDaAssociare.maxUmidita[2] = vm.associaColtMax;
               break;
             case "Raccolta":
-              vm.user.colture[index].minUmidita[3] = vm.associaColtMin;
-              vm.user.colture[index].maxUmidita[3] = vm.associaColtMax;
+              colturaDaAssociare.minUmidita[3] = vm.associaColtMin;
+              colturaDaAssociare.maxUmidita[3] = vm.associaColtMax;
               break;
           }
 

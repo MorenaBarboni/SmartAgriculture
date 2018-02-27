@@ -125,7 +125,7 @@
                         {{data.nome}}
                     </td>
                     <td class="col-md-2">
-                        MIN - MAX UMIDITA
+                        {{data.minUmidita}} - {{data.maxUmidita}}
                     </td>
                     <td class="col-md-2">
                         {{data.sensore}}
@@ -189,7 +189,7 @@
                                 </select>
                             </td>
                             <td class="col-md-2">
-                                <input type="checkbox" checked>
+                                <input type="checkbox" ng-model="vm.associaColtIrrigazione" ng-true-value="1" ng-false-value="0">
                             </td>
                         </tr>
                     </table>

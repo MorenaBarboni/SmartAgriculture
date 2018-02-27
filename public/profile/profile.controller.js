@@ -28,6 +28,12 @@
     //Parametri rimozione coltura
     vm.rimuoviColtSensore;
 
+    //Parametri modifica coltura
+    vm.modificaColtSensore;
+    vm.modificaColtStato;
+    vm.modificaColtMin;
+    vm.modificaColtMax;
+
     initController();
 
     function initController() {
@@ -200,56 +206,40 @@
       }
     }
 
-    //prende in input il numero sensore, e il valore di umidità minima da settare
-    //e aggiorna il valore di umidità minima
-    function setMinUmidita() {
-      var coltureUtente = vm.user.colture;
-      var statoColtura;
-      var index;
+    //Modifica gli attributi di una coltura associata a un sensore
+    vm.onModificaColtura = function () {
+      for (var i = 0; i < vm.user.colture.length; i++) {
+        if (vm.user.colture[i].sensore == vm.modificaColtSensore) {
+          vm.user.colture[i].statoCrescita = vm.modificaColtStato;
+          switch (vm.user.colture[i].statoCrescita) {
+            case "Seme":
+              vm.user.colture[i].minUmidita[0] = vm.modificaColtMin;
+              vm.user.colture[i].maxUmidita[0] = vm.modificaColtMax;
+              break;
+            case "Germoglio":
+              vm.user.colture[i].minUmidita[1] = vm.modificaColtMin;
+              vm.user.colture[i].maxUmidita[1] = vm.modificaColtMax;
+              break;
 
-      for (var i = 0; i < coltureUtente.length; i++) {
-        numeroSensoreOccupato = coltureUtente[i].sensore;
-        if (numeroSensoreOccupato === setMinUmiditaSensore) {
-
-          statoColtura = coltureUtente[i].statoCrescita;
-          index = i;
-
+            case "PiantaAdulta":
+              vm.user.colture[i].minUmidita[2] = vm.modificaColtMin;
+              vm.user.colture[i].maxUmidita[2] = vm.modificaColtMax;
+              break;
+            case "Raccolta":
+              vm.user.colture[i].minUmidita[3] = vm.modificaColtMin;
+              vm.user.colture[i].maxUmidita[3] = vm.modificaColtMax;
+              break;
+          }
           break;
         }
-      }
-      if (statoColtura != null) {
-        switch (statoColtura) {
-          case "Seme":
-            vm.user.colture[index].minUmidita[0] = provaMinUmidita;
-            console.log("Seme:" + provaMinUmidita);
-            break;
-          case "Germoglio":
-            vm.user.colture[index].minUmidita[1] = provaMinUmidita;
-            console.log("Germoglio:" + provaMinUmidita);
-            break;
-
-          case "PiantaAdulta":
-            vm.user.colture[index].minUmidita[2] = provaMinUmidita;
-            console.log("PiantaAdulta:" + provaMinUmidita);
-            break;
-          case "Raccolta":
-            vm.user.colture[index].minUmidita[3] = provaMinUmidita;
-            console.log("Raccolta:" + provaMinUmidita);
-            break;
-        }
-
-        var updateData = {};
-        updateData._id = vm.user._id;
-        updateData.colture = vm.user.colture;
-
-        userService.updateColtureUtente(updateData).then(function (response) {
+        userService.updateColtureUtente(vm.user).then(function (response) {
           if (response.data === "error") {
             console.log("errore");
           }
         })
-
       }
     }
+
 
   }
 })();

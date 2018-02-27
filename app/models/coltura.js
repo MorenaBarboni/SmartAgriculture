@@ -23,6 +23,12 @@ var colturaSchema = new mongoose.Schema({
   },
   tipoTerreno: {
     type: String, enum: ['Sabbioso', 'Ghiaioso', 'Argilloso', 'Limoso']
+  },
+  orarioAttivazione: {
+    type: Date
+  },
+  orarioDisattivazione: {
+    type: Date
   }
 });
 

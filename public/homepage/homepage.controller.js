@@ -21,17 +21,21 @@
             sensori: [
                 {
                     idSensore: 1,
-                    libero: true
+                    libero: true,
+                    umiditaPercepita: Math.floor((Math.random() * 100) + 1)
                 },
                 {
                     idSensore: 2,
-                    libero: true
+                    libero: true,
+                    umiditaPercepita: Math.floor((Math.random() * 100) + 1)
                 }, {
                     idSensore: 3,
-                    libero: true
+                    libero: true,
+                    umiditaPercepita: Math.floor((Math.random() * 100) + 1)
                 }, {
                     idSensore: 4,
-                    libero: true
+                    libero: true,
+                    umiditaPercepita: Math.floor((Math.random() * 100) + 1)
                 }
             ]
         };

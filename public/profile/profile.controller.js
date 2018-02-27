@@ -6,21 +6,28 @@
 
     var vm = this;
 
+    //Controlla se l'utente è loggato
     vm.isLoggedIn = authentication.isLoggedIn();
 
-    vm.user = {}; //Utente corrente
+    //Utente corrente
+    vm.user = {};
+
+    vm.coltureDisponibili = [];//Elenco di tutte le colture del db
+    vm.terreni = []; //Elenco di tutti i terreni
+    vm.statiCrescita = []; //Elenco di tutte gli stati di crescita
 
     //Parametri associazione coltura
     vm.associaColtNome;
     vm.associaColtSensore;
     vm.associaColtTerreno;
     vm.associaColtStato;
-    vm.associaColMin;
-    vm.associaColMax;
+    vm.associaColtMin;
+    vm.associaColtMax;
 
-    vm.coltureDisponibili = [];//Elenco di tutte le colture del db
-    vm.terreni = [];
-    vm.statiCrescita = [];
+
+    //Parametri rimozione coltura
+    vm.rimuoviColtSensore;
+
     vm.freeSensori = [];
 
     initController();
@@ -92,6 +99,27 @@
           colturaDaAssociare.tipoTerreno = vm.associaColtTerreno;
           colturaDaAssociare.statoCrescita = vm.associaColtStato;
 
+          //Associa umidità iniziale
+          switch (vm.associaColtStato) {
+            case "Seme":
+              vm.user.colture[index].minUmidita[0] = vm.associaColtMin;
+              vm.user.colture[index].maxUmidita[0] = vm.associaColtMax;
+              break;
+            case "Germoglio":
+              vm.user.colture[index].minUmidita[1] = vm.associaColtMin;
+              vm.user.colture[index].maxUmidita[1] = vm.associaColtMax;
+              break;
+
+            case "PiantaAdulta":
+              vm.user.colture[index].minUmidita[2] = vm.associaColtMin;
+              vm.user.colture[index].maxUmidita[2] = vm.associaColtMax;
+              break;
+            case "Raccolta":
+              vm.user.colture[index].minUmidita[3] = vm.associaColtMin;
+              vm.user.colture[index].maxUmidita[3] = vm.associaColtMax;
+              break;
+          }
+
           //Se il contadino non ha l'array colture
           if (!vm.user.colture) {
             var colture = []
@@ -138,41 +166,36 @@
       }
     }
 
+
     //Dato un numero di sensore rimuove la coltura associata a quel sensore
-    function rimuoviColtura() {
-      removeColturaFromUser(provaRemoveSensore);
-      liberaSensore(provaRemoveSensore);
+    vm.onRimuoviColtura = function () {
+      removeColturaFromUser(vm.rimuoviColtSensore);
+      liberaSensore(vm.rimuoviColtSensore);
       userService.updateAssociazioneColtura(vm.user).then(function (response) {
         if (response.data === "error") {
           console.log("errore");
         }
       })
     }
-
     //Prende in input un numero di sensore e rimuove la coltura che si riferisce a quel sensore
     //dall'array delle colture dell'utente
     function removeColturaFromUser(numeroSensore) {
       var coltureUtente = vm.user.colture;
       for (var i = 0; i < coltureUtente.length; i++) {
-        numeroSensoreOccupato = coltureUtente[i].sensore;
-        if (numeroSensoreOccupato === numeroSensore) {
+        if (coltureUtente[i].sensore == numeroSensore) {
           vm.user.colture.splice(i, 1);
         }
       }
     }
-
     //Dato un numero di sensore in input setta il sensore a libero.
     function liberaSensore(numeroSensore) {
       var sensoriUtente = vm.user.sensori;
       for (var i = 0; i < sensoriUtente.length; i++) {
-        idSensore = sensoriUtente[i].idSensore;
-        if (idSensore === numeroSensore) {
+        if (sensoriUtente[i].idSensore == numeroSensore) {
           sensoriUtente[i].libero = true;
         }
       }
     }
-
-
 
     //prende in input il numero sensore, e il valore di umidità minima da settare
     //e aggiorna il valore di umidità minima

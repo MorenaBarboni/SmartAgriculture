@@ -12,6 +12,10 @@
         templateUrl: "/profile/profile.view.html",
         controller: "profileCtrl",
         controllerAs: "vm"
+      }).when("/profile/details/:numSensore", {
+        templateUrl: "/profile/details.view.html",
+        controller: "detailsCtrl",
+        controllerAs: "vm"
       })
       .when("/logout", {
         resolve: {

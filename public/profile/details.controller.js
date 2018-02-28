@@ -26,6 +26,9 @@
     vm.modificaStart;
     vm.modificaStop;
 
+    //Stato acqua
+    vm.statoAcqua;
+
     initController();
 
     function initController() {
@@ -61,6 +64,13 @@
 
     }
 
+    //Restituisce true se l'acqua scorre
+    function statoAcquaAutomatica() {
+      if (vm.sensoreCorrente.umiditaPercepita < vm.colturaCorrente.minUmidita) {
+        vm.statoAcqua = true;
+      }
+    }
+
     //Recupera i dati di default della coltura corrente
     function getColturaDefault() {
       colturaService.getColturaByName(vm.colturaCorrente.nome).then(function (result) {
@@ -83,9 +93,10 @@
     }
 
     function gestioneIrrigazione() {
-      var attivo = false;
       if (vm.colturaCorrente.irrigazioneAutomatica) {
-        //todo
+        if (vm.sensoreCorrente.umiditaPercepita < vm.colturaCorrente.minUmidita) {
+          vm.statoAcqua = true;
+        }
       } else {
         var infoStart = new Date(vm.colturaCorrente.orarioAttivazione);
         var infoStop = new Date(vm.colturaCorrente.orarioDisattivazione);
@@ -96,19 +107,19 @@
         if (infoStart.getHours() <= dataAttuale.getHours()) {
           //se l'ora corrisponde ma mancano ancora tot minuti all'attivazione
           if ((infoStart.getHours() == dataAttuale.getHours()) && (infoStart.getMinutes() > dataAttuale.getMinutes()))
-            attivo = false;
+            vm.statoAcqua = false;
           else
-            attivo = true;
-          //se è attivo controllo quando arriva l'ora dello spegnimento
-          if (attivo && (infoStop.getHours() <= dataAttuale.getHours())) {
+            vm.statoAcqua = true;
+          //se è acceso controllo quando arriva l'ora dello spegnimento
+          if (vm.statoAcqua && (infoStop.getHours() <= dataAttuale.getHours())) {
             //se l'ora corrisponde ma mancano ancora tot minuti allo spegnimento
             if ((infoStop.getHours() == dataAttuale.getHours()) && (infoStop.getMinutes() > dataAttuale.getMinutes()))
-              attivo = true;
+              vm.statoAcqua = true;
             else
-              attivo = false;
+              vm.statoAcqua = false;
           }
         }
-        if (attivo)
+        if (vm.statoAcqua)
           console.log('attiva!');
         else
           console.log('disattiva!');
@@ -176,6 +187,7 @@
             console.log("errore");
           }
         })
+        window.location.reload();
       }
     }
 
@@ -183,15 +195,22 @@
     vm.setMinUmidita = function () {
       for (var i = 0; i < vm.user.colture.length; i++) {
         if (vm.user.colture[i].sensore == vm.numSensore) {
-          vm.user.colture[i].minUmidita = vm.modificaColtMin;
-          userService.updateColtureUtente(vm.user).then(function (response) {
-            if (response.data === "error") {
-              console.log("errore");
-            }
-          })
-          break;
+
+          if (vm.modificaColtMin >= vm.user.colture[i].maxUmidita) {
+            window.alert("L'umidità minima non può essere maggiore o uguale all'umidità massima");
+          } else {
+
+            vm.user.colture[i].minUmidita = vm.modificaColtMin;
+            userService.updateColtureUtente(vm.user).then(function (response) {
+              if (response.data === "error") {
+                console.log("errore");
+              }
+            })
+            break;
+          }
         }
       }
+      window.location.reload();
     }
 
     //Modifica umidità massima
@@ -207,6 +226,7 @@
           break;
         }
       }
+      window.location.reload();
     }
 
     //Modifica il tipo di irrigazione e imposta gli orari di irrigazione manuale

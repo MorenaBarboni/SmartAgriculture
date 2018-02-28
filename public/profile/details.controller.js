@@ -26,6 +26,9 @@
     vm.modificaStart;
     vm.modificaStop;
 
+    //Stato acqua
+    vm.statoAcqua;
+
     initController();
 
     function initController() {
@@ -40,6 +43,7 @@
         }).then(function () {
           getColturaDefault();
           getStatiCrescita();
+          statoAcquaAutomatica();
         })
     }
 
@@ -58,6 +62,13 @@
         }
       }
 
+    }
+
+    //Restituisce true se l'acqua scorre
+    function statoAcquaAutomatica() {
+      if (vm.sensoreCorrente.umiditaPercepita < vm.colturaCorrente.minUmidita) {
+        vm.statoAcqua = true;
+      }
     }
 
     //Recupera i dati di default della coltura corrente
@@ -142,6 +153,7 @@
             console.log("errore");
           }
         })
+        window.location.reload();
       }
     }
 
@@ -149,15 +161,22 @@
     vm.setMinUmidita = function () {
       for (var i = 0; i < vm.user.colture.length; i++) {
         if (vm.user.colture[i].sensore == vm.numSensore) {
-          vm.user.colture[i].minUmidita = vm.modificaColtMin;
-          userService.updateColtureUtente(vm.user).then(function (response) {
-            if (response.data === "error") {
-              console.log("errore");
-            }
-          })
-          break;
+
+          if (vm.modificaColtMin >= vm.user.colture[i].maxUmidita) {
+            window.alert("L'umidità minima non può essere maggiore o uguale all'umidità massima");
+          } else {
+
+            vm.user.colture[i].minUmidita = vm.modificaColtMin;
+            userService.updateColtureUtente(vm.user).then(function (response) {
+              if (response.data === "error") {
+                console.log("errore");
+              }
+            })
+            break;
+          }
         }
       }
+      window.location.reload();
     }
 
     //Modifica umidità massima
@@ -173,6 +192,7 @@
           break;
         }
       }
+      window.location.reload();
     }
 
     //Modifica il tipo di irrigazione e imposta gli orari di irrigazione manuale

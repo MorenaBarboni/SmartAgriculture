@@ -84,7 +84,7 @@
                         <div ng-show="minUpdate">
                             <p> Modifica Soglia Minima </p>
                             <form ng-submit="vm.setMinUmidita()">
-                                <input ng-model="vm.modificaColtMin">
+                                <input type="number" min="0" ng-model="vm.modificaColtMin">
                                 <button class="btn btn-sm" type="submit">Salva</button>
                             </form>
                         </div>
@@ -98,7 +98,7 @@
                         <div ng-show="maxUpdate">
                             <p> Modifica Soglia Massima </p>
                             <form ng-submit="vm.setMaxUmidita()">
-                                <input ng-model="vm.modificaColtMax">
+                                <input type="number" min="0" ng-model="vm.modificaColtMax">
                                 <button class="btn btn-sm" type="submit">Salva</button>
                             </form>
                         </div>
@@ -118,10 +118,10 @@
 
                     <li class="list-group-item">
                         <strong>Irrigazione Automatica:</strong>{{vm.colturaCorrente.irrigazioneAutomatica}}
-                        <label ng-show="{{vm.colturaCorrente.irrigazioneAutomatica}}">
+                        <label ng-show="vm.colturaCorrente.irrigazioneAutomatica">
                             Attiva
                         </label>
-                        <label ng-show="{{!vm.colturaCorrente.irrigazioneAutomatica}}">
+                        <label ng-show="!vm.colturaCorrente.irrigazioneAutomatica">
                             Disattiva
                             <!--                            <br> {{vm.colturaCorrente.orarioAttivazione}} ---- {{vm.colturaCorrente.orarioDisattivazione}} -->
                         </label>
@@ -152,9 +152,18 @@
                     </li>
                     <li class="list-group-item">
                         <strong>Irrigazione Attiva:</strong>
-                        <label>L'acqua scorre :)</label>
+                        <label ng-show="vm.statoAcqua">L'acqua scorre :)</label>
+                        <label ng-show="!vm.statoAcqua">L'acqua non scorre :(</label>
                     </li>
+                    
                 </ul>
+                <li class="list-group-item">
+                        <b> Avvia Irrigazione </b>
+                         <div class="material-switch pull-right">
+                             <input id="someSwitchOptionSuccess" name="someSwitchOption001" type="checkbox" ng-model="irriga.on"/>
+                             <label for="someSwitchOptionSuccess" class="label-success"></label>
+                         </div>
+                     </li>
                 <div>
 
                     <a class="col-md-4 btn" type="button" href="profilo">

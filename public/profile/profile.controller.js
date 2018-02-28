@@ -224,7 +224,7 @@
     }
 
     //Dettagli coltura
-    $scope.goToColturaDetails = function(numSensore) {
+    $scope.goToDetails = function(numSensore) {
       $location.url("/profile/details/" + numSensore);
     };
 

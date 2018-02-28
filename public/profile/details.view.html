@@ -51,7 +51,7 @@
                     </button>
                     <div ng-show="minUpdate">
                         <p> Modifica Soglia Minima </p>
-                        <form>
+                        <form ng-submit="vm.setMinUmidita()"> 
                             <input ng-model="vm.modificaColtMin">
                             <button class="btn btn-sm" type="submit">Salva</button>
                         </form>
@@ -65,7 +65,7 @@
                     </button>
                     <div ng-show="maxUpdate">
                         <p> Modifica Soglia Massima </p>
-                        <form>
+                        <form ng-submit="vm.setMaxUmidita()">
                             <input ng-model="vm.modificaColtMax">
                             <button class="btn btn-sm" type="submit">Salva</button>
                         </form>

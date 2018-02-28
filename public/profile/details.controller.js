@@ -106,6 +106,38 @@
       }
     }
 
+    //Modifica umidità minima
+    vm.setMinUmidita = function () {
+      for (var i = 0; i < vm.user.colture.length; i++) {
+        if (vm.user.colture[i].sensore == vm.numSensore) {
+          vm.user.colture[i].minUmidita = vm.modificaColtMin;;
+          break;
+        }
+        userService.updateColtureUtente(vm.user).then(function (response) {
+          if (response.data === "error") {
+            console.log("errore");
+          }
+        })
+        window.location.reload();
+      }
+    }
+
+     //Modifica umidità massima
+     vm.setMaxUmidita = function () {
+      for (var i = 0; i < vm.user.colture.length; i++) {
+        if (vm.user.colture[i].sensore == vm.numSensore) {
+          vm.user.colture[i].maxUmidita = vm.modificaColtMax;
+          break;
+        }
+        userService.updateColtureUtente(vm.user).then(function (response) {
+          if (response.data === "error") {
+            console.log("errore");
+          }
+        })
+        window.location.reload();
+      }
+    }
+
     //Modifica il tipo di irrigazione e imposta gli orari di irrigazione manuale
     vm.setIrrigazione = function () {
       if (vm.modificaIrrigazione == 1) {

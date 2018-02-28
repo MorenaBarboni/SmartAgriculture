@@ -177,25 +177,20 @@
 
     //Modifica il tipo di irrigazione e imposta gli orari di irrigazione manuale
     vm.setIrrigazione = function () {
-      for (var i = 0; i < vm.user.colture.length; i++) {
-        if (vm.user.colture[i].sensore == vm.numSensore) {
-          if (vm.modificaIrrigazione == 1) {
-            vm.user.colture[i].irrigazioneAutomatica = true;
-            vm.user.colture[i].orarioAttivazione = null;
-            vm.user.colture[i].orarioDisattivazione = null;
-          } else {
-            vm.user.colture[i].irrigazioneAutomatica = false;
-            vm.user.colture[i].orarioAttivazione = vm.modificaStart;
-            vm.user.colture[i].orarioDisattivazione = vm.modificaStop;
-          }
-          userService.updateColtureUtente(vm.user).then(function (response) {
-            if (response.data === "error") {
-              console.log("errore");
-            }
-          })
-          break;
-        }
+      if (vm.modificaIrrigazione == 1) {
+        vm.colturaCorrente.irrigazioneAutomatica = true;
+        vm.colturaCorrente.orarioAttivazione = null;
+        vm.colturaCorrente.orarioDisattivazione = null;
+      } else {
+        vm.colturaCorrente.irrigazioneAutomatica = false;
+        vm.colturaCorrente.orarioAttivazione = vm.modificaStart;
+        vm.colturaCorrente.orarioDisattivazione = vm.modificaStop;
       }
+      userService.updateColtureUtente(vm.user).then(function (response) {
+        if (response.data === "error") {
+          console.log("errore");
+        }
+      })
       window.location.reload();
     }
   }

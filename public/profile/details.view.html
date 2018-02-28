@@ -117,15 +117,14 @@
                     </li>
 
                     <li class="list-group-item">
-                        <strong>Irrigazione Automatica:</strong>
-                        <label>SI - NO (da sistemare)</label>
-                        <!--             <label class="col-md-1" ng-show="{{vm.colturaCorrente.irrigazioneAutomatica}}">
-                        Attiva
-                    </label>
-                    <label class="col-md-1" ng-show="!{{vm.colturaCorrente.irrigazioneAutomatica}}">
-                        Disattiva <br>
-                        {{vm.colturaCorrente.orarioAttivazione}} - {{vm.colturaCorrente.orarioDisattivazione}}
-                    </label> -->
+                        <strong>Irrigazione Automatica:</strong>{{vm.colturaCorrente.irrigazioneAutomatica}}
+                        <label ng-show="{{vm.colturaCorrente.irrigazioneAutomatica}}">
+                            Attiva
+                        </label>
+                        <label ng-show="{{!vm.colturaCorrente.irrigazioneAutomatica}}">
+                            Disattiva
+                            <!--                            <br> {{vm.colturaCorrente.orarioAttivazione}} ---- {{vm.colturaCorrente.orarioDisattivazione}} -->
+                        </label>
                         <button type="button" class="btn btn-link" title="Modifica">
                             <i class="fa fa-cog fa-lg" aria-hidden="true" style="color: red" ng-click="irrigazione = ! irrigazione"></i>
                         </button>

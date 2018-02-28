@@ -15,11 +15,13 @@
 
     vm.colturaCorrente = {}
     vm.colturaDefault = {};//Dati di default della coltura corrente
+    vm.statiCrescitaDisponibili = [];
 
     //Parametri modifica coltura
     vm.modificaColtStato;
     vm.modificaColtMin;
     vm.modificaColtMax;
+    vm.modificaIrrigazione;
 
     initController();
 
@@ -34,6 +36,7 @@
           initColtura();
         }).then(function () {
           getColturaDefault();
+          getStatiCrescita();
         })
     }
 
@@ -54,11 +57,24 @@
       })
     }
 
+    //Ottiene tutti i possibili stati di crescita disponibili
+    function getStatiCrescita() {
+      colturaService.getStatiCrescita().then(function (result) {
+        vm.statiCrescitaDisponibili = result;
+        for (var i = 0; i < vm.statiCrescitaDisponibili.length; i++) {
+          if (vm.statiCrescitaDisponibili[i] == vm.colturaCorrente.statoCrescita) {
+            //tolgo gli stati passati
+            vm.statiCrescitaDisponibili = vm.statiCrescitaDisponibili.slice(i + 1, vm.statiCrescitaDisponibili.length);
+            break;
+          }
+        }
+      });
+    }
 
     //Modifica lo stato e setta l'umidità di default
     vm.setStato = function () {
       for (var i = 0; i < vm.user.colture.length; i++) {
-        if (vm.user.colture[i].sensore == vm.vm.numSensore) {
+        if (vm.user.colture[i].sensore == vm.numSensore) {
           vm.user.colture[i].statoCrescita = vm.modificaColtStato;
 
           //Associa umidità di default per quello stato
@@ -90,7 +106,24 @@
       }
     }
 
-
+    //Modifica il tipo di irrigazione e imposta gli orari di irrigazione manuale
+    vm.setIrrigazione = function () {
+      if (vm.modificaIrrigazione == 1) {
+        vm.colturaCorrente.irrigazioneAutomatica = true;
+        vm.colturaCorrente.orarioAttivazione = null;
+        vm.colturaCorrente.orarioDisattivazione = null;
+      } else {
+        vm.colturaCorrente.irrigazioneAutomatica = false;
+        vm.colturaCorrente.orarioAttivazione = vm.modificaStart;
+        vm.colturaCorrente.orarioDisattivazione = vm.modificaStop;
+      }
+      userService.updateColtureUtente(vm.user).then(function (response) {
+        if (response.data === "error") {
+          console.log("errore");
+        }
+      })
+      window.location.reload();
+    }
 
   }
 })();

@@ -51,7 +51,7 @@
                     </button>
                     <div ng-show="minUpdate">
                         <p> Modifica Soglia Minima </p>
-                        <form ng-submit="vm.setMinUmidita()"> 
+                        <form ng-submit="vm.setMinUmidita()">
                             <input ng-model="vm.modificaColtMin">
                             <button class="btn btn-sm" type="submit">Salva</button>
                         </form>
@@ -124,7 +124,7 @@
                 </li>
             </ul>
             <div>
-                <button class="col-md-4 btn" type="submit">Ripristina Dati</button>
+                <button class="col-md-4 btn" type="submit" ng-click="setUmiditaDefault()">Ripristina Dati</button>
                 <a class="col-md-4 btn" type="button" href="profilo">
                     < Indietro </button>
             </div>

@@ -13,7 +13,7 @@
 
     vm.numSensore = $routeParams.numSensore; //Numero di sensore
 
-    vm.colturaCorrente = {}
+    vm.colturaCorrente = {} //Coltura corrente
     vm.colturaDefault = {};//Dati di default della coltura corrente
     vm.statiCrescitaDisponibili = [];
 
@@ -22,6 +22,8 @@
     vm.modificaColtMin;
     vm.modificaColtMax;
     vm.modificaIrrigazione;
+    vm.modificaStart;
+    vm.modificaStop;
 
     initController();
 
@@ -76,8 +78,6 @@
       for (var i = 0; i < vm.user.colture.length; i++) {
         if (vm.user.colture[i].sensore == vm.numSensore) {
           vm.user.colture[i].statoCrescita = vm.modificaColtStato;
-
-          //Associa umidità di default per quello stato
           switch (vm.modificaColtStato) {
             case "Seme":
               vm.user.colture[i].minUmidita = vm.colturaDefault.minUmidita[0];
@@ -106,56 +106,89 @@
       }
     }
 
+    //Setta umidità di default
+    $scope.setUmiditaDefault = function () {
+      for (var i = 0; i < vm.user.colture.length; i++) {
+        if (vm.user.colture[i].sensore == vm.numSensore) {
+          switch (vm.colturaCorrente.statoCrescita) {
+            case "Seme":
+              vm.user.colture[i].minUmidita = vm.colturaDefault.minUmidita[0];
+              vm.user.colture[i].maxUmidita = vm.colturaDefault.maxUmidita[0];
+              break;
+            case "Germoglio":
+              vm.user.colture[i].minUmidita = vm.colturaDefault.minUmidita[1];
+              vm.user.colture[i].maxUmidita = vm.colturaDefault.maxUmidita[1];
+              break;
+            case "PiantaAdulta":
+              vm.user.colture[i].minUmidita = vm.colturaDefault.minUmidita[2];
+              vm.user.colture[i].maxUmidita = vm.colturaDefault.maxUmidita[2];
+              break;
+            case "Raccolta":
+              vm.user.colture[i].minUmidita = vm.colturaDefault.minUmidita[3];
+              vm.user.colture[i].maxUmidita = vm.colturaDefault.maxUmidita[3];
+              break;
+          }
+        }
+        userService.updateColtureUtente(vm.user).then(function (response) {
+          if (response.data === "error") {
+            console.log("errore");
+          }
+        })
+      }
+    }
+
     //Modifica umidità minima
     vm.setMinUmidita = function () {
       for (var i = 0; i < vm.user.colture.length; i++) {
         if (vm.user.colture[i].sensore == vm.numSensore) {
-          vm.user.colture[i].minUmidita = vm.modificaColtMin;;
+          vm.user.colture[i].minUmidita = vm.modificaColtMin;
+          userService.updateColtureUtente(vm.user).then(function (response) {
+            if (response.data === "error") {
+              console.log("errore");
+            }
+          })
           break;
         }
-        userService.updateColtureUtente(vm.user).then(function (response) {
-          if (response.data === "error") {
-            console.log("errore");
-          }
-        })
-        window.location.reload();
       }
     }
 
-     //Modifica umidità massima
-     vm.setMaxUmidita = function () {
+    //Modifica umidità massima
+    vm.setMaxUmidita = function () {
       for (var i = 0; i < vm.user.colture.length; i++) {
         if (vm.user.colture[i].sensore == vm.numSensore) {
           vm.user.colture[i].maxUmidita = vm.modificaColtMax;
+          userService.updateColtureUtente(vm.user).then(function (response) {
+            if (response.data === "error") {
+              console.log("errore");
+            }
+          })
           break;
         }
-        userService.updateColtureUtente(vm.user).then(function (response) {
-          if (response.data === "error") {
-            console.log("errore");
-          }
-        })
-        window.location.reload();
       }
     }
 
     //Modifica il tipo di irrigazione e imposta gli orari di irrigazione manuale
     vm.setIrrigazione = function () {
-      if (vm.modificaIrrigazione == 1) {
-        vm.colturaCorrente.irrigazioneAutomatica = true;
-        vm.colturaCorrente.orarioAttivazione = null;
-        vm.colturaCorrente.orarioDisattivazione = null;
-      } else {
-        vm.colturaCorrente.irrigazioneAutomatica = false;
-        vm.colturaCorrente.orarioAttivazione = vm.modificaStart;
-        vm.colturaCorrente.orarioDisattivazione = vm.modificaStop;
-      }
-      userService.updateColtureUtente(vm.user).then(function (response) {
-        if (response.data === "error") {
-          console.log("errore");
+      for (var i = 0; i < vm.user.colture.length; i++) {
+        if (vm.user.colture[i].sensore == vm.numSensore) {
+          if (vm.modificaIrrigazione == 1) {
+            vm.user.colture[i].irrigazioneAutomatica = true;
+            vm.user.colture[i].orarioAttivazione = null;
+            vm.user.colture[i].orarioDisattivazione = null;
+          } else {
+            vm.user.colture[i].irrigazioneAutomatica = false;
+            vm.user.colture[i].orarioAttivazione = vm.modificaStart;
+            vm.user.colture[i].orarioDisattivazione = vm.modificaStop;
+          }
+          userService.updateColtureUtente(vm.user).then(function (response) {
+            if (response.data === "error") {
+              console.log("errore");
+            }
+          })
+          break;
         }
-      })
+      }
       window.location.reload();
     }
-
   }
 })();

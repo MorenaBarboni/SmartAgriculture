@@ -14,6 +14,7 @@
     vm.numSensore = $routeParams.numSensore; //Numero di sensore
 
     vm.colturaCorrente = {} //Coltura corrente
+    vm.sensoreCorrente = {} //Sensore corrente
     vm.colturaDefault = {};//Dati di default della coltura corrente
     vm.statiCrescitaDisponibili = [];
 
@@ -42,7 +43,7 @@
         })
     }
 
-    //Inizializza coltura corrente
+    //Inizializza coltura e sensore corrente
     function initColtura() {
       for (var i = 0; i < vm.user.colture.length; i++) {
         if (vm.user.colture[i].sensore == vm.numSensore) {
@@ -50,6 +51,13 @@
           break;
         }
       }
+      for (var i = 0; i < vm.user.sensori.length; i++) {
+        if (vm.user.sensori[i].idSensore == vm.numSensore) {
+          vm.sensoreCorrente = vm.user.sensori[i];
+          break;
+        }
+      }
+
     }
 
     //Recupera i dati di default della coltura corrente

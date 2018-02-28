@@ -20,114 +20,149 @@
 
 <body>
     <div class="container">
-        <div class="title">
-            <h2>{{vm.colturaCorrente.nome}}</h2>
+        <div id="sum_box" class="row mbl">
+            <div class="row">
+                <div class="col-sm-6 col-md-3">
+                    <div class="panel coltura db mbm">
+                        <div class="panel-body">
+                            <p class="icon">
+                                <i class="icon fa fa-leaf"></i>
+                            </p>
+                            <h4 class="value">
+                                <span>{{vm.colturaCorrente.nome}}</span>
+
+                            </h4>
+                            <p class="description">
+                                Sensore {{vm.numSensore}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-3">
+                    <div class="panel infoColtura">
+                        <div class="panel-body">
+                            <b>Terreno:</b> {{vm.colturaCorrente.tipoTerreno}}
+                        </div>
+                    </div>
+                    <div class="panel infoColtura">
+                        <div class="panel-body">
+                            <b> Umidità Percepita:</b> 34
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="col-md-6 col-md-offset-3">
-            <ul class="list-group text-center">
-                <li class="list-group-item">
-                    <strong> Stato Crescita:</strong>
-                    <label>{{vm.colturaCorrente.statoCrescita}}</label>
-                    <button type="button" class="btn btn-link" title="Modifica">
-                        <i class="fa fa-cog fa-lg" aria-hidden="true" style="color: red" ng-click="statoUpdate = ! statoUpdate"></i>
-                    </button>
-                    <div ng-show="statoUpdate">
-                        <p> Modifica Stato Crescita</p>
-                        <form ng-submit="vm.setStato()">
-                            <select ng-model="vm.modificaColtStato">
-                                <option ng-repeat="stato in vm.statiCrescitaDisponibili" value="{{stato}}">
-                                    {{stato}}
-                                </option>
-                            </select>
-                            <button class="btn btn-sm" type="submit">Salva</button>
-                        </form>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <strong>Soglia Minima Umidità:</strong>
-                    <label>{{vm.colturaCorrente.minUmidita.toString()}}</label>
-                    <button type="button" class="btn btn-link" title="Modifica">
-                        <i class="fa fa-cog fa-lg" aria-hidden="true" style="color: red" ng-click="minUpdate = ! minUpdate"></i>
-                    </button>
-                    <div ng-show="minUpdate">
-                        <p> Modifica Soglia Minima </p>
-                        <form ng-submit="vm.setMinUmidita()">
-                            <input ng-model="vm.modificaColtMin">
-                            <button class="btn btn-sm" type="submit">Salva</button>
-                        </form>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <strong>Soglia Massima Umidità:</strong>
-                    <label>{{vm.colturaCorrente.maxUmidita.toString()}}</label>
-                    <button type="button" class="btn btn-link" title="Modifica">
-                        <i class="fa fa-cog fa-lg" aria-hidden="true" style="color: red" ng-click="maxUpdate = ! maxUpdate"></i>
-                    </button>
-                    <div ng-show="maxUpdate">
-                        <p> Modifica Soglia Massima </p>
-                        <form ng-submit="vm.setMaxUmidita()">
-                            <input ng-model="vm.modificaColtMax">
-                            <button class="btn btn-sm" type="submit">Salva</button>
-                        </form>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <strong>Tipo Terreno:</strong>
-                    <label>{{vm.colturaCorrente.tipoTerreno}}</label>
-                </li>
-                <li class="list-group-item">
-                    <strong>Sensore Collegato:</strong>
-                    <label>{{vm.numSensore}}</label>
-                </li>
-                <li class="list-group-item">
-                    <strong>Umidità Percepita dal Sensore:</strong>
-                    <label></label>
-                </li>
-                <li class="list-group-item">
-                    <strong>Irrigazione Automatica:</strong>
-                    <label>SI - NO (da sistemare)</label>
-                    <!--             <label class="col-md-1" ng-show="{{vm.colturaCorrente.irrigazioneAutomatica}}">
+        <div class="row" style="margin-top:50px;">
+            <div class="col-md-6 ">
+                <ul class="list-group text-center">
+                    <li class="list-group-item list-group-item-success">
+                        <strong>Impostazioni Umidità:</strong>
+                    </li>
+                    <li class="list-group-item">
+                        <strong> Stato Crescita:</strong>
+                        <label>{{vm.colturaCorrente.statoCrescita}}</label>
+                        <button type="button" class="btn btn-link" title="Modifica">
+                            <i class="fa fa-cog fa-lg" aria-hidden="true" style="color: red" ng-click="statoUpdate = ! statoUpdate"></i>
+                        </button>
+                        <div ng-show="statoUpdate">
+                            <p> Modifica Stato Crescita</p>
+                            <form ng-submit="vm.setStato()">
+                                <select ng-model="vm.modificaColtStato">
+                                    <option ng-repeat="stato in vm.statiCrescitaDisponibili" value="{{stato}}">
+                                        {{stato}}
+                                    </option>
+                                </select>
+                                <button class="btn btn-sm" type="submit">Salva</button>
+                            </form>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Soglia Minima Umidità:</strong>
+                        <label>{{vm.colturaCorrente.minUmidita.toString()}}</label>
+                        <button type="button" class="btn btn-link" title="Modifica">
+                            <i class="fa fa-cog fa-lg" aria-hidden="true" style="color: red" ng-click="minUpdate = ! minUpdate"></i>
+                        </button>
+                        <div ng-show="minUpdate">
+                            <p> Modifica Soglia Minima </p>
+                            <form ng-submit="vm.setMinUmidita()">
+                                <input ng-model="vm.modificaColtMin">
+                                <button class="btn btn-sm" type="submit">Salva</button>
+                            </form>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Soglia Massima Umidità:</strong>
+                        <label>{{vm.colturaCorrente.maxUmidita.toString()}}</label>
+                        <button type="button" class="btn btn-link" title="Modifica">
+                            <i class="fa fa-cog fa-lg" aria-hidden="true" style="color: red" ng-click="maxUpdate = ! maxUpdate"></i>
+                        </button>
+                        <div ng-show="maxUpdate">
+                            <p> Modifica Soglia Massima </p>
+                            <form ng-submit="vm.setMaxUmidita()">
+                                <input ng-model="vm.modificaColtMax">
+                                <button class="btn btn-sm" type="submit">Salva</button>
+                            </form>
+                        </div>
+                    </li>
+
+                </ul>
+                <button class="col-md-4 btn" type="submit" ng-click="setUmiditaDefault()">Ripristina Umidità</button>
+
+            </div>
+
+            <div class="col-md-6">
+                <ul class="list-group text-center">
+
+                    <li class="list-group-item list-group-item-success">
+                        <strong>Impostazioni Irrigazione:</strong>
+                    </li>
+
+                    <li class="list-group-item">
+                        <strong>Irrigazione Automatica:</strong>
+                        <label>SI - NO (da sistemare)</label>
+                        <!--             <label class="col-md-1" ng-show="{{vm.colturaCorrente.irrigazioneAutomatica}}">
                         Attiva
                     </label>
                     <label class="col-md-1" ng-show="!{{vm.colturaCorrente.irrigazioneAutomatica}}">
                         Disattiva <br>
                         {{vm.colturaCorrente.orarioAttivazione}} - {{vm.colturaCorrente.orarioDisattivazione}}
                     </label> -->
-                    <button type="button" class="btn btn-link" title="Modifica">
-                        <i class="fa fa-cog fa-lg" aria-hidden="true" style="color: red" ng-click="irrigazione = ! irrigazione"></i>
-                    </button>
-                    <div ng-show="irrigazione">
-                        <p> Modifica Tipo di Irrigazione </p>
-                        <form ng-submit="vm.setIrrigazione()">
-                            <label>Vuoi impostare l'irrigazione automatica?</label>
-                            <input type="checkbox" ng-model="vm.modificaIrrigazione" ng-true-value="1" ng-false-value="0">
-                            <div class="list-group-item" ng-if="!vm.modificaIrrigazione">
-                                <strong>Orari Irrigazione:</strong>
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <label>Orario Inizio</label>
-                                        <input type="time" ng-model="vm.modificaStart">
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label>Orario Fine</label>
-                                        <input type="time" ng-model="vm.modificaStop">
+                        <button type="button" class="btn btn-link" title="Modifica">
+                            <i class="fa fa-cog fa-lg" aria-hidden="true" style="color: red" ng-click="irrigazione = ! irrigazione"></i>
+                        </button>
+                        <div ng-show="irrigazione">
+                            <p> Modifica Tipo di Irrigazione </p>
+                            <form ng-submit="vm.setIrrigazione()">
+                                <label>Vuoi impostare l'irrigazione automatica?</label>
+                                <input type="checkbox" ng-model="vm.modificaIrrigazione" ng-true-value="1" ng-false-value="0">
+                                <div class="list-group-item" ng-if="!vm.modificaIrrigazione">
+                                    <strong>Orari Irrigazione:</strong>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <label>Orario Inizio</label>
+                                            <input type="time" ng-model="vm.modificaStart">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <label>Orario Fine</label>
+                                            <input type="time" ng-model="vm.modificaStop">
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <button class="btn btn-sm" type="submit">Salva</button>
-                        </form>
-                    </div>
-                </li>
-                <li class="list-group-item">
-                    <strong>Irrigazione Attiva:</strong>
-                    <label>L'acqua scorre :)</label>
-                </li>
-            </ul>
-            <div>
-                <button class="col-md-4 btn" type="submit" ng-click="setUmiditaDefault()">Ripristina Dati</button>
-                <a class="col-md-4 btn" type="button" href="profilo">
-                    < Indietro </button>
+                                <button class="btn btn-sm" type="submit">Salva</button>
+                            </form>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <strong>Irrigazione Attiva:</strong>
+                        <label>L'acqua scorre :)</label>
+                    </li>
+                </ul>
+                <div>
+
+                    <a class="col-md-4 btn" type="button" href="profilo">
+                        < Indietro </button>
+                </div>
             </div>
         </div>
+
     </div>
 </body>

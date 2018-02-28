@@ -6,8 +6,6 @@ var url = 'mongodb://localhost/greenhouse';
 require('../models/users'); //Utenti
 require('../models/coltura'); //Colture
 require('../models/sensore'); //Sensori
-require('../models/feedback'); //Feedback
-
 
 mongoose.connect(url);
 

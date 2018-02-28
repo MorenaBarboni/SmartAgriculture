@@ -102,12 +102,11 @@
           colturaDaAssociare.sensore = vm.associaColtSensore;
           colturaDaAssociare.tipoTerreno = vm.associaColtTerreno;
           colturaDaAssociare.statoCrescita = vm.associaColtStato;
-
-          if (vm.associaColtIrrigazione == 1)
+          if (vm.associaColtIrrigazione == 1) {
             colturaDaAssociare.irrigazioneAutomatica = true;
-          else
+          } else {
             colturaDaAssociare.irrigazioneAutomatica = false;
-
+          }
           //Associa umidità iniziale
           switch (vm.associaColtStato) {
             case "Seme":
@@ -176,14 +175,15 @@
 
     //Dato un numero di sensore rimuove la coltura associata a quel sensore
     $scope.onRimuoviColtura = function (rimuoviColtSensore) {
-      console.log(rimuoviColtSensore);
-      removeColturaFromUser(rimuoviColtSensore);
-      liberaSensore(rimuoviColtSensore);
-      userService.updateAssociazioneColtura(vm.user).then(function (response) {
-        if (response.data === "error") {
-          console.log("errore");
-        }
-      })
+      if (confirm("Vuoi davvero eliminare la coltura?") == true) {
+        removeColturaFromUser(rimuoviColtSensore);
+        liberaSensore(rimuoviColtSensore);
+        userService.updateAssociazioneColtura(vm.user).then(function (response) {
+          if (response.data === "error") {
+            console.log("errore");
+          }
+        })
+      }
     }
 
     //Prende in input un numero di sensore e rimuove la coltura che si riferisce a quel sensore
@@ -222,6 +222,11 @@
         })
       }
     }
+
+    //Dettagli coltura
+    $scope.goToColturaDetails = function(numSensore) {
+      $location.url("/profile/details/" + numSensore);
+    };
 
 
   }

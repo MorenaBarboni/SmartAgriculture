@@ -16,79 +16,101 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- CSS e JS personalizzato -->
     <link rel="stylesheet" href="../content/css/style.css">
-    <script src="../content/js/script.js"></script>
 </head>
 
 <body>
-    <div class="container-fluid">
-        <nav class="navbar navbar-inverse">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse-4">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand">{{vm.user.nome}}</a>
-                </div>
-
-                <div class="collapse navbar-collapse" id="navbar-collapse-4">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li>
-                            <a href="#home" class="home-show">Home</a>
-                        </li>
-                        <li>
-                            <a href="#colture" class="colture-show">Le tue colture</a>
-                        </li>
-                        <li class="dropdown">
-                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                <span class="caret"></span>
-                            </a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li>
-                                    <a href="#impostazioni">Modifica Profilo</a>
-                                </li>
-                                <li class="divider"></li>
-                                <li>
-                                    <a href="logout">Logout</a>
-                                </li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </div>
-    <section class="container" id="home">
+    <div class="container">
+        <div class="title">
+            <h2>{{vm.colturaCorrente.nome}}</h2>
+        </div>
         <div class="col-md-6 col-md-offset-3">
             <ul class="list-group text-center">
                 <li class="list-group-item">
-                    <strong> Nome: </strong>
-                    <label>{{vm.user.nome}}</label>
+                    <strong> Stato Crescita:</strong>
+                    <label>{{vm.colturaCorrente.statoCrescita}}</label>
+                    <button type="submit" class="btn btn-link" title="Modifica">
+                        <i class="fa fa-cog fa-lg" aria-hidden="true" style="color: red" ng-click="statoUpdate = ! statoUpdate"></i>
+                    </button>
+                    <div ng-show="statoUpdate">
+                        <p> Modifica Stato Crescita</p>
+                        <form>
+                            <select>
+
+                            </select>
+                            <button class="btn btn-sm" type="submit">Salva</button>
+                        </form>
+                    </div>
                 </li>
                 <li class="list-group-item">
-                    <strong> Cognome:</strong>
-                    <label>{{vm.user.cognome}}</label>
+                    <strong>Soglia Minima Umidità:</strong>
+                    <label>{{vm.colturaCorrente.minUmidita.toString()}}</label>
+                    <button type="submit" class="btn btn-link" title="Modifica">
+                        <i class="fa fa-cog fa-lg" aria-hidden="true" style="color: red" ng-click="minUpdate = ! minUpdate"></i>
+                    </button>
+                    <div ng-show="minUpdate">
+                        <p> Modifica Soglia Minima </p>
+                        <form>
+                            <input>
+                            <button class="btn btn-sm" type="submit">Salva</button>
+                        </form>
+                    </div>
                 </li>
                 <li class="list-group-item">
-                    <strong>Username:</strong>
-                    <label>{{vm.user.username}}</label>
+                    <strong>Soglia Massima Umidità:</strong>
+                    <label>{{vm.colturaCorrente.maxUmidita.toString()}}</label>
+                    <button type="submit" class="btn btn-link" title="Modifica">
+                        <i class="fa fa-cog fa-lg" aria-hidden="true" style="color: red" ng-click="maxUpdate = ! maxUpdate"></i>
+                    </button>
+                    <div ng-show="maxUpdate">
+                        <p> Modifica Soglia Massima </p>
+                        <form>
+                            <input>
+                            <button class="btn btn-sm" type="submit">Salva</button>
+                        </form>
+                    </div>
                 </li>
                 <li class="list-group-item">
-                    <strong>Email:</strong>
-                    <label>{{vm.user.email}}</label>
+                    <strong>Tipo Terreno:</strong>
+                    <label>{{vm.colturaCorrente.tipoTerreno}}</label>
                 </li>
                 <li class="list-group-item">
-                    <strong>Coltura Selezionata:</strong>
-                    <label>{{vm.colturaCorrente.nome}}</label>
-                </li>
-                <li class="list-group-item">
-                    <strong>NumSensore:</strong>
+                    <strong>Sensore Collegato:</strong>
                     <label>{{vm.numSensore}}</label>
                 </li>
+                <li class="list-group-item">
+                    <strong>Umidità Percepita dal Sensore:</strong>
+                    <label></label>
+                </li>
+                <li class="list-group-item">
+                    <strong>Irrigazione Automatica:</strong>
+                    <input type="checkbox" ng-model="nomenome" ng-true-value="1" ng-false-value="0">
+                </li>
+                <form>
+                    <li class="list-group-item" ng-if="!nomenome">
+                        <strong>Orari Irrigazione:</strong>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Orario Inizio</label>
+                                <input type="time">
+                            </div>
+                            <div class="col-md-6">
+                                <label>Orario Fine</label>
+                                <input type="time">
+                            </div>
+                        </div>
+                        <button class="btn btn-sm" type="submit">Salva</button>
+                    </li>
+                </form>
+                <li class="list-group-item">
+                    <strong>Irrigazione Attiva:</strong>
+                    <label>L'acqua scorre :)</label>
+                </li>
             </ul>
+            <div>
+                <button class="col-md-4 btn" type="submit">Ripristina Dati</button>
+                <a class="col-md-4 btn" type="button" href="profilo">
+                    < Indietro </button>
+            </div>
         </div>
-    </section>
-
+    </div>
 </body>

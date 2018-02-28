@@ -46,3 +46,6 @@ body {
 section {
   height: 100vh ;
 }
+label {
+  font-weight: normal !important;
+}

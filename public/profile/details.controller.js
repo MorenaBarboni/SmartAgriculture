@@ -40,6 +40,7 @@
         }).then(function () {
           getColturaDefault();
           getStatiCrescita();
+          gestioneIrrigazione();
         })
     }
 
@@ -79,6 +80,39 @@
           }
         }
       });
+    }
+
+    function gestioneIrrigazione() {
+      var attivo = false;
+      if (vm.colturaCorrente.irrigazioneAutomatica) {
+        //todo
+      } else {
+        var infoStart = new Date(vm.colturaCorrente.orarioAttivazione);
+        var infoStop = new Date(vm.colturaCorrente.orarioDisattivazione);
+        $scope.start = infoStart.getHours() + ":" + infoStart.getMinutes();
+        $scope.stop = infoStop.getHours() + ":" + infoStop.getMinutes();
+        var dataAttuale = new Date();
+        console.log(dataAttuale);
+        if (infoStart.getHours() <= dataAttuale.getHours()) {
+          //se l'ora corrisponde ma mancano ancora tot minuti all'attivazione
+          if ((infoStart.getHours() == dataAttuale.getHours()) && (infoStart.getMinutes() > dataAttuale.getMinutes()))
+            attivo = false;
+          else
+            attivo = true;
+          //se è attivo controllo quando arriva l'ora dello spegnimento
+          if (attivo && (infoStop.getHours() <= dataAttuale.getHours())) {
+            //se l'ora corrisponde ma mancano ancora tot minuti allo spegnimento
+            if ((infoStop.getHours() == dataAttuale.getHours()) && (infoStop.getMinutes() > dataAttuale.getMinutes()))
+              attivo = true;
+            else
+              attivo = false;
+          }
+        }
+        if (attivo)
+          console.log('attiva!');
+        else
+          console.log('disattiva!');
+      }
     }
 
     //Modifica lo stato e setta l'umidità di default

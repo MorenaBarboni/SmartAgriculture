@@ -117,13 +117,14 @@
                     </li>
 
                     <li class="list-group-item">
-                        <strong>Irrigazione Automatica:</strong>{{vm.colturaCorrente.irrigazioneAutomatica}}
-                        <label ng-show="{{vm.colturaCorrente.irrigazioneAutomatica}}">
+                        <strong>Irrigazione Automatica:</strong>
+                        <label ng-show="vm.colturaCorrente.irrigazioneAutomatica">
                             Attiva
                         </label>
-                        <label ng-show="{{!vm.colturaCorrente.irrigazioneAutomatica}}">
+                        <label ng-show="!vm.colturaCorrente.irrigazioneAutomatica">
                             Disattiva
-                            <!--                            <br> {{vm.colturaCorrente.orarioAttivazione}} ---- {{vm.colturaCorrente.orarioDisattivazione}} -->
+                            <br>
+                            {{start}} - {{stop}}
                         </label>
                         <button type="button" class="btn btn-link" title="Modifica">
                             <i class="fa fa-cog fa-lg" aria-hidden="true" style="color: red" ng-click="irrigazione = ! irrigazione"></i>
@@ -138,11 +139,11 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             <label>Orario Inizio</label>
-                                            <input type="time" ng-model="vm.modificaStart">
+                                            <input required type="time" ng-model="vm.modificaStart">
                                         </div>
                                         <div class="col-md-6">
                                             <label>Orario Fine</label>
-                                            <input type="time" ng-model="vm.modificaStop">
+                                            <input required type="time" ng-model="vm.modificaStop">
                                         </div>
                                     </div>
                                 </div>

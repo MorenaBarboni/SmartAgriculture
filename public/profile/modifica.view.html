@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="it">
+
+<head>
+    <title>
+        Coltura
+    </title>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!-- CSS e JS personalizzato -->
+    <link rel="stylesheet" href="../content/css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="title">
+            <h2>NOME COLTURA</h2>
+        </div>
+        <div class="col-md-6 col-md-offset-3">
+            <ul class="list-group text-center">
+                <li class="list-group-item">
+                    <strong> Stato Crescita:</strong>
+                    <select></select>
+                </li>
+                <li class="list-group-item">
+                    <strong>Soglia Minima Umidità:</strong>
+                    <input>
+                </li>
+                <li class="list-group-item">
+                    <strong>Soglia Massima Umidità:</strong>
+                    <input>
+                </li>
+                <li class="list-group-item">
+                    <strong>Tipo Terreno:</strong>
+                    <label></label>
+                </li>
+                <li class="list-group-item">
+                    <strong>Sensore Collegato:</strong>
+                    <label></label>
+                </li>
+                <li class="list-group-item">
+                    <strong>Umidità Percepita dal Sensore:</strong>
+                    <label></label>
+                </li>
+                <li class="list-group-item">
+                    <strong>Irrigazione Automatica:</strong>
+                    <input type="checkbox" ng-model="nomenome" ng-true-value="1" ng-false-value="0">
+                </li>
+                <li class="list-group-item" ng-if="!nomenome">
+                    <strong>Orari Irrigazione:</strong>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Orario Inizio</label>
+                            <input type="time">
+                        </div>
+                        <div class="col-md-6">
+                            <label>Orario Fine</label>
+                            <input type="time">
+                        </div>
+                    </div>
+
+                </li>
+                <li class="list-group-item">
+                    <strong>Irrigazione Attiva:</strong>
+                    <label></label>
+                </li>
+            </ul>
+            <div>
+                <button class="col-md-4 btn" type="submit">Salva Modifiche</button>
+                <button class="col-md-4 btn" type="submit">Ripristina Dati</button>
+                <button class="col-md-4 btn" type="submit">
+                    < Indietro </button>
+            </div>
+        </div>
+    </div>
+</body>

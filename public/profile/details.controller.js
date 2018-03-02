@@ -96,38 +96,40 @@
     }
 
     function gestioneIrrigazione() {
-      if (vm.colturaCorrente.irrigazioneOn) {
-        if (vm.colturaCorrente.irrigazioneAutomatica) {
-          if (vm.sensoreCorrente.umiditaPercepita < vm.colturaCorrente.minUmidita) {
+      if (vm.colturaCorrente.irrigazioneAutomatica && vm.colturaCorrente.irrigazioneOn) {
+        if (vm.sensoreCorrente.umiditaPercepita < vm.colturaCorrente.minUmidita) {
+          vm.statoAcqua = true;
+        }
+      } else {
+        var infoStart = new Date(vm.colturaCorrente.orarioAttivazione);
+        var infoStop = new Date(vm.colturaCorrente.orarioDisattivazione);
+        $scope.start = infoStart.getHours() + ":" + infoStart.getMinutes();
+        $scope.stop = infoStop.getHours() + ":" + infoStop.getMinutes();
+        var dataAttuale = new Date();
+        console.log(dataAttuale);
+        if (infoStart.getHours() <= dataAttuale.getHours()) {
+          //se l'ora corrisponde ma mancano ancora tot minuti all'attivazione
+          if ((infoStart.getHours() == dataAttuale.getHours()) && (infoStart.getMinutes() > dataAttuale.getMinutes()))
+            vm.statoAcqua = false;
+          else if (!vm.colturaCorrente.irrigazioneOn)
+            vm.statoAcqua = false;
+          else
             vm.statoAcqua = true;
-          }
-        } else {
-          var infoStart = new Date(vm.colturaCorrente.orarioAttivazione);
-          var infoStop = new Date(vm.colturaCorrente.orarioDisattivazione);
-          $scope.start = infoStart.getHours() + ":" + infoStart.getMinutes();
-          $scope.stop = infoStop.getHours() + ":" + infoStop.getMinutes();
-          var dataAttuale = new Date();
-          console.log(dataAttuale);
-          if (infoStart.getHours() <= dataAttuale.getHours()) {
-            //se l'ora corrisponde ma mancano ancora tot minuti all'attivazione
-            if ((infoStart.getHours() == dataAttuale.getHours()) && (infoStart.getMinutes() > dataAttuale.getMinutes()))
-              vm.statoAcqua = false;
-            else
-              vm.statoAcqua = true;
-            //se è acceso controllo quando arriva l'ora dello spegnimento
-            if (vm.statoAcqua && (infoStop.getHours() <= dataAttuale.getHours())) {
-              //se l'ora corrisponde ma mancano ancora tot minuti allo spegnimento
+          //se è acceso controllo quando arriva l'ora dello spegnimento
+          if (vm.statoAcqua && (infoStop.getHours() <= dataAttuale.getHours())) {
+            //se l'ora corrisponde ma mancano ancora tot minuti allo spegnimento
+            if (vm.colturaCorrente.irrigazioneOn) {
               if ((infoStop.getHours() == dataAttuale.getHours()) && (infoStop.getMinutes() > dataAttuale.getMinutes()))
                 vm.statoAcqua = true;
-              else
-                vm.statoAcqua = false;
             }
+            else
+              vm.statoAcqua = false;
           }
-          if (vm.statoAcqua)
-            console.log('attiva!');
-          else
-            console.log('disattiva!');
         }
+        if (vm.statoAcqua)
+          console.log('attiva!');
+        else
+          console.log('disattiva!');
       }
     }
 

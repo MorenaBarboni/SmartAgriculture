@@ -60,6 +60,7 @@ userSchema.methods.generateToken = function () {
       username: this.email,
       name: this.name,
       colture: this.colture,
+      sensori:this.sensori,
       exp: parseInt(expiry.getTime() / 1000)
     },
     auth

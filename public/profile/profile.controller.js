@@ -21,8 +21,6 @@
     vm.associaColtSensore;
     vm.associaColtTerreno;
     vm.associaColtStato;
-    //  vm.associaColtMin; PER ORA NON SERVONO
-    //  vm.associaColtMax; IN CASO RICORDIAMOCI A CANCELLARLI!!
     vm.associaColtIrrigazione;
 
     //Parametri rimozione coltura

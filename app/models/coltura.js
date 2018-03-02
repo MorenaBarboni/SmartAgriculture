@@ -17,6 +17,10 @@ var colturaSchema = new mongoose.Schema({
     type: Boolean,
     default: true
   },
+  irrigazioneOn: {
+    type: Boolean,
+    default: false
+  },
   statoCrescita: {
     type: String,
     enum: ['Seme', 'Germoglio', 'PiantaAdulta', 'Raccolta'], default: 'Seme'

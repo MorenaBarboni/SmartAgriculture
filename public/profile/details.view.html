@@ -123,8 +123,7 @@
                         </label>
                         <label ng-show="!vm.colturaCorrente.irrigazioneAutomatica">
                             Disattiva
-                            <br>
-                            {{start}} - {{stop}}
+                            <br> {{start}} - {{stop}}
                         </label>
                         <button type="button" class="btn btn-link" title="Modifica">
                             <i class="fa fa-cog fa-lg" aria-hidden="true" style="color: red" ng-click="irrigazione = ! irrigazione"></i>
@@ -156,15 +155,18 @@
                         <label ng-show="vm.statoAcqua">L'acqua scorre :)</label>
                         <label ng-show="!vm.statoAcqua">L'acqua non scorre :(</label>
                     </li>
-                    
+
                 </ul>
                 <li class="list-group-item">
-                        <b> Avvia Irrigazione </b>
-                         <div class="material-switch pull-right">
-                             <input id="someSwitchOptionSuccess" name="someSwitchOption001" type="checkbox" ng-model="irriga.on"/>
-                             <label for="someSwitchOptionSuccess" class="label-success"></label>
-                         </div>
-                     </li>
+                    <b ng-show="!vm.colturaCorrente.irrigazioneOn"> Avvia sistema di irrigazione </b>
+                    <b ng-show="vm.colturaCorrente.irrigazioneOn"> Ferma sistema di irrigazione </b>
+                    <div class="material-switch pull-right">
+                        <input id="someSwitchOptionSuccess" name="someSwitchOption001" type="checkbox" ng-model="vm.colturaCorrente.irrigazioneOn"
+                            ng-change="vm.switchIrrigazione()" />
+                        <label for="someSwitchOptionSuccess" class="label-success"></label>
+
+                    </div>
+                </li>
                 <div>
 
                     <a class="col-md-4 btn" type="button" href="profilo">

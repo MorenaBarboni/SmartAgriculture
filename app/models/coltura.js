@@ -19,7 +19,7 @@ var colturaSchema = new mongoose.Schema({
   },
   irrigazioneOn: {
     type: Boolean,
-    default: false
+    default: true
   },
   statoCrescita: {
     type: String,

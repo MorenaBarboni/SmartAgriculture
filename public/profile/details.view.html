@@ -152,8 +152,8 @@
                     </li>
                     <li class="list-group-item">
                         <strong>Stato Irrigazione:</strong>
-                        <label ng-show="vm.statoAcqua">L'acqua scorre</label>
-                        <label ng-show="!vm.statoAcqua">L'acqua non scorre</label>
+                        <label ng-show="vm.statoAcqua" class="text-success">L'irrigazione è attiva</label>
+                        <label ng-show="!vm.statoAcqua" class="text-danger bold">L'irrigazione non è attiva</label>
                     </li>
 
                 </ul>

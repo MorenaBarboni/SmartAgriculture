@@ -16,7 +16,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- CSS e JS personalizzato -->
     <link rel="stylesheet" href="../content/css/style.css">
-    <script src="../content/js/script.js"></script>
 </head>
 
 <body>
@@ -134,11 +133,14 @@
                     <td class="col-md-1">
                         {{data.statoCrescita}}
                     </td>
-                    <td class="col-md-1" ng-show="{{data.irrigazioneAutomatica}}">
+                    <td class="col-md-1" ng-show="{{data.irrigazioneAutomatica}} && {{data.irrigazioneOn}}">
                         Attiva
                     </td>
-                    <td class="col-md-1" ng-show="!{{data.irrigazioneAutomatica}}">
+                    <td class="col-md-1" ng-show="!{{data.irrigazioneAutomatica}} && {{data.irrigazioneOn}}">
                         Disattiva
+                    </td>
+                    <td class="col-md-1 text-danger" ng-show="!{{data.irrigazioneOn}}">
+                        ATTENZIONE E' STATO FERMATO IL SISTEMA DI IRRIGAZIONE
                     </td>
                     <td class="col-md-1 text-center">
                         <form>

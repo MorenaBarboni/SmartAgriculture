@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
     <!-- CSS e JS personalizzato -->
     <link rel="stylesheet" href="../content/css/style.css">
-    <script src="../content/js/script.js"></script>
 </head>
 
 <body>
@@ -59,10 +58,6 @@
                     </div>
                     <div class="form-group">
                         <input required type="password" class="form-control" id="password" ng-model="vm.registerData.password" placeholder="password">
-                    </div>
-                    <div class="form-group">
-                        <input required type="password" onkeyup="check()" class="form-control" id="verifica_password" placeholder="conferma password">
-                        <div id="controllo" class="text-danger"></div>
                     </div>
                     <button type="submit" class="btn btn-default center-block" id="registrazione">Registrati</button>
                 </form>

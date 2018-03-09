@@ -123,7 +123,8 @@
                         </label>
                         <label ng-show="!vm.colturaCorrente.irrigazioneAutomatica">
                             Disattiva
-                            <br> <p  ng-show="vm.colturaCorrente.orarioAttivazione"> {{start}} - {{stop}} </p>
+                            <br>
+                            <p ng-show="vm.colturaCorrente.orarioAttivazione"> {{start}} - {{stop}} </p>
                         </label>
                         <button type="button" class="btn btn-link" title="Modifica">
                             <i class="fa fa-cog fa-lg" aria-hidden="true" style="color: red" ng-click="irrigazione = ! irrigazione"></i>
@@ -167,12 +168,14 @@
 
                     </div>
                 </li>
-                <div>
 
-                    <a class="col-md-4 btn" type="button" href="profilo">
-                        < Indietro </button>
-                </div>
             </div>
+        </div>
+
+        <div style="margin-top: 150px;">
+
+            <a type="button" href="profilo" style="font-size:18px;">
+                < Indietro </button>
         </div>
 
     </div>

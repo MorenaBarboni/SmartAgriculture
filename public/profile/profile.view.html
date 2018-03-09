@@ -40,7 +40,7 @@
                         <li>
                             <a href="#colture" class="colture-show">Le tue colture</a>
                         </li>
-                       
+
 
                         <li class="dropdown">
                             <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
@@ -52,7 +52,8 @@
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <a href="logout"><span class="glyphicon glyphicon-log-out"></span>&nbspLogout</a>
+                                    <a href="logout">
+                                        <span class="glyphicon glyphicon-log-out"></span>&nbspLogout</a>
                                 </li>
                             </ul>
                         </li>
@@ -101,56 +102,53 @@
             <div class="row panel-title text-center text-uppercase">
                 <strong> Le Mie Colture </strong>
             </div>
-            <table class="table table-bordered">
+        
+            <table class="table table-striped custab">
                 <tr>
+
+                    <th class="col-md-1 text-capitalize text-center">Nome Coltura: </th>
+                    <th class="col-md-1 text-capitalize text-center">Umidità Ideale: </th>
+                    <th class="col-md-1 text-capitalize text-center">Sensore Collegato: </th>
+                    <th class="col-md-1 text-capitalize text-center">Tipo Terreno: </th>
+                    <th class="col-md-1 text-capitalize text-center">Stato Crescita: </th>
+                    <th class="col-md-1 text-capitalize text-center">Irrigazione Automatica: </th>
                     <th> </th>
-                    <th class="col-md-1 text-capitalize">Nome Coltura: </th>
-                    <th class="col-md-1 text-capitalize">Umidità Ideale: </th>
-                    <th class="col-md-1 text-capitalize">Sensore Collegato: </th>
-                    <th class="col-md-1 text-capitalize">Tipo Terreno: </th>
-                    <th class="col-md-1 text-capitalize">Stato Crescita: </th>
-                    <th class="col-md-1 text-capitalize">Irrigazione Automatica: </th>
-                    <th> </th>
+
                 </tr>
                 <tr ng-repeat="data in vm.user.colture">
+
                     <td class="col-md-1 text-center">
-                        <form>
-                            <button type="submit" class="btn btn-link" title="Rimuovi Coltura">
-                                <i class="fa fa-minus-circle fa-lg" aria-hidden="true" style="color: red" ng-click="onRimuoviColtura(data.sensore)"></i>
-                            </button>
-                        </form>
-                    </td>
-                    <td class="col-md-1">
                         {{data.nome}}
                     </td>
-                    <td class="col-md-1">
+                    <td class="col-md-1 text-center">
                         {{data.minUmidita.toString()}} - {{data.maxUmidita.toString()}}
                     </td>
-                    <td class="col-md-1">
+                    <td class="col-md-1 text-center">
                         {{data.sensore}}
                     </td>
-                    <td class="col-md-1">
+                    <td class="col-md-1 text-center">
                         {{data.tipoTerreno}}
                     </td>
-                    <td class="col-md-1">
+                    <td class="col-md-1 text-center">
                         {{data.statoCrescita}}
                     </td>
-                    <td class="col-md-1" ng-show="{{data.irrigazioneAutomatica}} && {{data.irrigazioneOn}}">
+                    <td class="col-md-1 text-center" ng-show="{{data.irrigazioneAutomatica}} && {{data.irrigazioneOn}}">
                         Attiva
                     </td>
-                    <td class="col-md-1" ng-show="!{{data.irrigazioneAutomatica}} && {{data.irrigazioneOn}}">
+                    <td class="col-md-1 text-center" ng-show="!{{data.irrigazioneAutomatica}} && {{data.irrigazioneOn}}">
                         Disattiva
                     </td>
                     <td class="col-md-1 text-danger" ng-show="!{{data.irrigazioneOn}}">
-                        ATTENZIONE E' STATO FERMATO IL SISTEMA DI IRRIGAZIONE
-                    </td>
+                        <div class="text-center">
+                            <i class="fa fa-exclamation-triangle" style="color: rgb(201, 79, 79)"></i>
+                            &nbsp ATTENZIONE <br> Il sistema di irrigazione è </div> <div style="margin-left:2px;"> stato spento </div>
                     <td class="col-md-1 text-center">
-                        <form>
-                            <button type="submit" class="btn btn-link" title="Dettagli Coltura">
-                                <i class="fa fa-info-circle fa-lg" aria-hidden="true" style="color: cornflowerblue" ng-click="goToDetails(data.sensore)"></i>
-                            </button>
-                        </form>
+                        <a class='btn btn-info btn-xs' ng-click="goToDetails(data.sensore)">
+                            <span class="glyphicon glyphicon-edit"></span> Info</a>
+                        <a ng-click="onRimuoviColtura(data.sensore)" class="btn btn-danger btn-xs">
+                            <span class="glyphicon glyphicon-remove"></span> Del</a>
                     </td>
+
                 </tr>
             </table>
         </section>
@@ -160,10 +158,10 @@
             </div>
             <form ng-submit="vm.onSubmitColtura()">
                 <div>
-                    <table class="table">
+                    <table class="table table-striped custab" style="margin-bottom: 20px;">
                         <tr>
                             <th class="col-md-2 text-capitalize">Nome Coltura: </th>
-                            <th class="col-md-2 text-capitalize">Scegli Sensore: </th>
+                            <th class="col-md-2 text-capitalize">Sensore: </th>
                             <th class="col-md-2 text-capitalize">Tipo Terreno: </th>
                             <th class="col-md-2 text-capitalize"> Stato Crescita: </th>
                             <th class="col-md-2 text-capitalize">Irrigazione Automatica: </th>
@@ -202,8 +200,9 @@
                             </td>
                         </tr>
                     </table>
+                    <button type="submit" class="btn btn-success">Aggiungi</button>
                 </div>
-                <button type="submit" class="btn btn-success">Aggiungi</button>
+               
             </form>
         </section>
 

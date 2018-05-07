@@ -25,6 +25,87 @@ var insalata = new coltura({
 });
 insalata.save(function (err) {
     if (err) throw err;
+})
+
+var carote = new coltura({
+    nome: 'Carote',
+    minUmidita: [48, 52, 54, 56],
+    maxUmidita: [60, 63, 66, 68]
+});
+carote.save(function (err) {
+    if (err) throw err;
+});
+
+var pomodori = new coltura({
+    nome: 'Pomodori',
+    minUmidita: [50, 52, 55, 57],
+    maxUmidita: [68, 70, 74, 78]
+});
+pomodori.save(function (err) {
+    if (err) throw err;
+});
+
+var angurie = new coltura({
+    nome: 'Angurie',
+    minUmidita: [55, 58, 63, 65],
+    maxUmidita: [68, 70, 74, 80]
+});
+angurie.save(function (err) {
+    if (err) throw err;
+});
+
+var cocomeri = new coltura({
+    nome: 'Cocomeri',
+    minUmidita: [40, 42, 44, 46],
+    maxUmidita: [48, 50, 52, 55]
+});
+cocomeri.save(function (err) {
+    if (err) throw err;
+});
+
+var erba = new coltura({
+    nome: 'Erba',
+    minUmidita: [30, 33, 36, 40],
+    maxUmidita: [46, 48, 50, 52]
+});
+erba.save(function (err) {
+    if (err) throw err;
+});
+
+var ciliegie = new coltura({
+    nome: 'Ciliegie',
+    minUmidita: [44, 46, 48, 50],
+    maxUmidita: [56, 60, 65, 68]
+});
+ciliegie.save(function (err) {
+    if (err) throw err;
+});
+
+var fagioli = new coltura({
+    nome: 'Fagioli',
+    minUmidita: [34, 38, 41, 44],
+    maxUmidita: [46, 48, 51, 53]
+});
+fagioli.save(function (err) {
+    if (err) throw err;
+});
+
+var mele = new coltura({
+    nome: 'Mele',
+    minUmidita: [50, 53, 55, 57],
+    maxUmidita: [60, 63, 65, 69]
+});
+mele.save(function (err) {
+    if (err) throw err;
+});
+
+var cactus = new coltura({
+    nome: 'Cactus',
+    minUmidita: [15, 23, 25, 30],
+    maxUmidita: [33, 35, 38, 44]
+});
+cactus.save(function (err) {
+    if (err) throw err;
 });
 
 var sensore1 = new sensore({
@@ -54,6 +135,7 @@ var sensore4 = new sensore({
 sensore4.save(function (err) {
     if (err) throw err;
 });
+
 
 
 

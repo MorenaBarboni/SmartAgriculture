@@ -54,15 +54,6 @@ angurie.save(function (err) {
     if (err) throw err;
 });
 
-var cocomeri = new coltura({
-    nome: 'Cocomeri',
-    minUmidita: [40, 42, 44, 46],
-    maxUmidita: [48, 50, 52, 55]
-});
-cocomeri.save(function (err) {
-    if (err) throw err;
-});
-
 var erba = new coltura({
     nome: 'Erba',
     minUmidita: [30, 33, 36, 40],
